@@ -1,11 +1,12 @@
 # Plataforma de Reservas de Canchas 
 
-## 🚀 Idea principal
-Una plataforma para reservar canchas deportivas en Bahía Blanca, con posibilidad de escalar a otras ciudades. En lugar de limitarse a un solo complejo, la app administra múltiples canchas de diferentes locales.
+## 🚀 Objetivo
+El objetivo principal de esta WebPage es crear una solución simple para diferentes canchas de la ciudad de Bahia Blanca, con el objetivo de poder implementarse inclusive en otras ciudades. Evitando y mejorando los sistemas actuales, generalmente basados en Excel y WhatsApp.
+En esta página, se podra a grandes razgos. Como cliente alquilar un turno, como administrador de las canchas poder gestionar de una manera prolija los turnos ocupados y disponibles. Y por ultimo el gestor de locales general, que administrara los locales aderidos.
 
 ## 🔑 Funcionalidades
 ### Para usuarios (clientes / jugadores):
-Registro y login mediante número de celular, con validación vía SMS/WhatsApp.
+Registro y login mediante número de celular, con validación vía WhatsApp.
 
 #### Búsqueda de canchas por:
 - Ubicación
@@ -34,3 +35,5 @@ Ayudando a que las reservas sean rápidas y en segundos. Y pudiendo acceder desd
 > Base de datos: PostgreSQL (Ya utilizado en otros trabahos).
 > Autenticación: via JWT.
 > Hosting: A definir.
+
+Cualquier cambio lo vamos a ir adiriendo
