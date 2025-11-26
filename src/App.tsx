@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import { Home } from './pages/Home';
 import { Clubes } from './pages/Clubes';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
 
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
         <Route
           path="/home"
