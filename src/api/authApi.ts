@@ -18,6 +18,30 @@ export interface LoginResponse {
 }
 
 export const authApi = {
+  register: async (payload: { nombre: string; email: string; password: string }) => {
+    const response = await fetch(`${API_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      // intentar leer mensaje de error del backend
+      try {
+        const err = await response.json();
+        throw new Error(err.message || 'Error en el registro');
+      } catch {
+        // si no hay JSON legible, lanzar error genérico
+        throw new Error('Error en el registro');
+      }
+    }
+
+    // Podemos devolver la respuesta cruda para que la página decida (ej: mensaje de éxito)
+    const data = await response.json();
+    return data;
+  },
   login: async (credentials: LoginRequest): Promise<LoginResponse> => {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
