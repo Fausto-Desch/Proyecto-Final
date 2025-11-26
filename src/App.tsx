@@ -1,19 +1,67 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import { HomeAdmin } from "./pages/HomeAdmin";
+import  HomeUser  from "./pages/HomeUser";
+import { Clubes } from "./pages/ClubesAdmin";
+import  ClubesUsuario  from "./pages/ClubesUsuarios";
+
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <div className="text-center p-10 bg-white rounded-xl shadow-lg">
-        <h1 className="text-4xl font-bold text-blue-600 mb-4">
-          ¡Funciona! 🚀
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Tailwind CSS v3 está instalado correctamente.
-        </p>
-        <button className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-          Click me
-        </button>
-      </div>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* ADMIN */}
+        <Route
+          path="/home-admin"
+          element={
+            <AuthenticatedRoute>
+              <HomeAdmin />
+            </AuthenticatedRoute>
+          }
+        />
+
+        {/* Usuarios */}
+        <Route
+          path="/home-user"
+          element={
+            <AuthenticatedRoute>
+              <HomeUser />
+            </AuthenticatedRoute>
+          }
+        />
+
+        {/* Clubes ADMIN */}
+        <Route
+          path="/clubes"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <Clubes />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Clubes USUARIO */}
+        <Route
+          path="/clubes-usuario"
+          element={
+            <AuthenticatedRoute>
+              <ClubesUsuario />
+            </AuthenticatedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
+export default App;
 
 export default App
