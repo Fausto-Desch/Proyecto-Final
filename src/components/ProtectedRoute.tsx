@@ -15,14 +15,9 @@ export default function ProtectedRoute({ children, allowedRole }: ProtectedRoute
     return <Navigate to="/login" replace />;
   }
 
-  // Si el rol no coincide, redirigir a la ruta correcta según el rol
+  // Si el rol no coincide, redirigir al home
   if (role !== allowedRole) {
-    if (role === 'admin') {
-      return <Navigate to="/admin" replace />;
-    } else if (role === 'user') {
-      return <Navigate to="/user" replace />;
-    }
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/home" replace />;
   }
 
   return <>{children}</>;

@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import AdminPage from './pages/AdminPage';
-import UserPage from './pages/UserPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
 import { Home } from './pages/Home';
 import { Clubes } from './pages/Clubes';
 
@@ -15,25 +14,22 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
 
         <Route
-          path="/admin"
+          path="/home"
           element={
-            <ProtectedRoute allowedRole="admin">
-              <AdminPage />
-            </ProtectedRoute>
+            <AuthenticatedRoute>
+              <Home />
+            </AuthenticatedRoute>
           }
         />
 
         <Route
-          path="/user"
+          path="/clubes"
           element={
-            <ProtectedRoute allowedRole="user">
-              <UserPage />
+            <ProtectedRoute allowedRole="admin">
+              <Clubes />
             </ProtectedRoute>
           }
         />
-
-        <Route path="/home" element={<Home />} />
-        <Route path="/clubes" element={<Clubes />} />
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

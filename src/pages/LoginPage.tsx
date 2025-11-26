@@ -11,16 +11,11 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Si ya está logeado, redirige según el rol
+    // Si ya está logeado, redirigir al home
     const token = authApi.getToken();
-    const role = authApi.getRole();
 
-    if (token && role) {
-      if (role === 'admin') {
-        navigate('/admin', { replace: true });
-      } else {
-        navigate('/user', { replace: true });
-      }
+    if (token) {
+      navigate('/home', { replace: true });
     }
   }, [navigate]);
 
@@ -33,12 +28,8 @@ export default function LoginPage() {
       const data = await authApi.login({ email, password });
       authApi.saveUserData(data);
 
-      // Redirige según el rol
-      if (data.usuario.rol === 'admin') {
-        navigate('/admin');
-      } else {
-        navigate('/user');
-      }
+      // Redirigir siempre al home después del login
+      navigate('/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al iniciar sesión');
     } finally {
