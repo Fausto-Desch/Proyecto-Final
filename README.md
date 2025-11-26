@@ -1,39 +1,73 @@
-# Plataforma de Reservas de Canchas 
+# React + TypeScript + Vite
 
-## 🚀 Objetivo
-El objetivo principal de esta WebPage es crear una solución simple para diferentes canchas de la ciudad de Bahia Blanca, con el objetivo de poder implementarse inclusive en otras ciudades. Evitando y mejorando los sistemas actuales, generalmente basados en Excel y WhatsApp.
-En esta página, se podra a grandes razgos. Como cliente alquilar un turno, como administrador de las canchas poder gestionar de una manera prolija los turnos ocupados y disponibles. Y por ultimo el gestor de locales general, que administrara los locales aderidos.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🔑 Funcionalidades
-### Para usuarios (clientes / jugadores):
-Registro y login mediante número de celular, con validación vía WhatsApp.
+Currently, two official plugins are available:
 
-#### Búsqueda de canchas por:
-- Ubicación
-- Precio
-- Tipo de piso
-- Disponibilidad
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Ayudando a que las reservas sean rápidas y en segundos. Y pudiendo acceder desde la web sin tener el contacto directo.
+## React Compiler
 
-### Para locales (dueños de las canchas / trabajadores en esa area):
-- Historial de reservas.
-- Notificaciones de partidos (recordatorios, cancelaciones).
-- Panel de administración de sus canchas.
-- Configuración de precios y horarios.
-- Confirmación o rechazo de reservas.
-- Posibilidad de gestionar pagos desde WhatsApp.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-### Para administrador general
-- Dashboard con información de todos los locales, usuarios y reservas.
-- Control de comisiones (% por reserva).
-- Gestión de usuarios y dueños de canchas.
+## Expanding the ESLint configuration
 
-## ⚙️ Tecnologías a utilizar:
-> Frontend (usuarios y dueños): React Web y Tailwind.
-> Backend: Typescript, Node.js con Express.
-> Base de datos: PostgreSQL (Ya utilizado en otros trabahos).
-> Autenticación: via JWT.
-> Hosting: A definir.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Cualquier cambio lo vamos a ir adiriendo
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
