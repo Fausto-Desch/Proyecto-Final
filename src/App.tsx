@@ -1,4 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import AdminPage from './pages/AdminPage';
+import UserPage from './pages/UserPage';
+import ProtectedRoute from './components/ProtectedRoute';
 import { Home } from './pages/Home';
 import { Clubes } from './pages/Clubes';
 
@@ -6,15 +10,35 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Redirigir automáticamente la raíz al Home */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        
-        {/* Tus rutas actuales */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/user"
+          element={
+            <ProtectedRoute allowedRole="user">
+              <UserPage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/home" element={<Home />} />
         <Route path="/clubes" element={<Clubes />} />
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;
