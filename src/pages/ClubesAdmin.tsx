@@ -3,19 +3,37 @@ import { Link } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { Building2, MapPin, Edit, Trash2, Plus } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
+interface Club {
+  id: number;
+  nombre: string;
+  direccion: string;
+  canchas: number;
+}
+
+interface ModalState {
+  open: boolean;
+  modo: "add" | "edit";
+  data: Club | null;
+}
+
 export function Clubes() {
-  const [clubes, setClubes] = useState([
+  const [clubes, setClubes] = useState<Club[]>([
     { id: 1, nombre: "Club Atletico Union", direccion: "Av. Alem 1250", canchas: 3 },
     { id: 2, nombre: "Club Deportivo Bahiense", direccion: "Zapiola 350", canchas: 2 },
     { id: 3, nombre: "Club Estudiantes", direccion: "Colon 75", canchas: 4 },
   ]);
 
-  const [modal, setModal] = useState({ open: false, modo: "add", data: null });
+  const [modal, setModal] = useState<ModalState>({ 
+    open: false, 
+    modo: "add", 
+    data: null 
+  });
 
 
-  const editarClub = (club) => {
+  const editarClub = (club: Club) => {
     setModal({
       open: true,
       modo: "edit",
@@ -30,7 +48,7 @@ export function Clubes() {
     setModal({
       open: true,
       modo: "add",
-      data: { nombre: "", direccion: "", canchas: 0 },
+      data: { id: 0, nombre: "", direccion: "", canchas: 0 },
     });
   };
 
@@ -38,9 +56,11 @@ export function Clubes() {
   // guardar editar y agregar
   // ===============================
   const guardarClub = () => {
+    if (!modal.data) return;
+
     if (modal.modo === "edit") {
       setClubes(
-        clubes.map((c) => (c.id === modal.data.id ? modal.data : c))
+        clubes.map((c) => (c.id === modal.data!.id ? modal.data! : c))
       );
     } else {
       setClubes([
@@ -55,7 +75,7 @@ export function Clubes() {
     setModal({ open: false, modo: "add", data: null });
   };
 
-  const eliminarClub = (id) => {
+  const eliminarClub = (id: number) => {
     setClubes(clubes.filter((club) => club.id !== id));
   };
 
@@ -68,15 +88,19 @@ export function Clubes() {
         {/* añadir boton */}
         <button
           onClick={agregarClub}
-          className="absolute top-10 right-10 bg-blue-400 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-500 transition flex items-center gap-2"
+          className="absolute top-10 right-10 bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-500 transition flex items-center gap-2"
         >
           <Plus size={18} /> Añadir Club
         </button>
 
-        <h1 className="text-3xl font-bold text-blue-700 mb-4">Listado de Clubes</h1>
-        <p className="text-gray-600 mb-8">
-          Aqui puedes ver los clubes y la cantidad de canchas disponibles.
-        </p>
+        <div className="mb-10 border-b border-gray-200 pb-6">
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600 mb-3">
+            Listado de Clubes
+          </h1>
+          <p className="text-lg text-gray-500 max-w-2xl">
+            Aquí puedes ver los clubes registrados y la cantidad de canchas disponibles actualmente.
+          </p>
+        </div>
 
         {/* cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -123,18 +147,26 @@ export function Clubes() {
             </div>
           ))}
         </div>
-
-        <Link to="/home" className="mt-10 inline-block text-blue-500 hover:underline">
-          ← Volver al Home
-        </Link>
+        <div className="mt-10">
+          <Link
+            to="/home-admin"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-600 font-medium shadow-sm hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 group"
+          >
+            <ArrowLeft
+              size={18}
+              className="group-hover:-translate-x-1 transition-transform duration-200"
+            />
+            Volver al Panel de Control
+          </Link>
+        </div>
       </div>
 
       <Footer />
 
   
       {/* agregar/editar */}
- 
-      {modal.open && (
+
+      {modal.open && modal.data && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center p-4">
           <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
 
@@ -151,7 +183,7 @@ export function Clubes() {
                 className="border rounded-lg px-3 py-2"
                 value={modal.data.nombre}
                 onChange={(e) =>
-                  setModal({ ...modal, data: { ...modal.data, nombre: e.target.value } })
+                  setModal({ ...modal, data: { ...modal.data!, nombre: e.target.value } })
                 }
               />
 
@@ -161,7 +193,7 @@ export function Clubes() {
                 className="border rounded-lg px-3 py-2"
                 value={modal.data.direccion}
                 onChange={(e) =>
-                  setModal({ ...modal, data: { ...modal.data, direccion: e.target.value } })
+                  setModal({ ...modal, data: { ...modal.data!, direccion: e.target.value } })
                 }
               />
 
@@ -171,14 +203,14 @@ export function Clubes() {
                 className="border rounded-lg px-3 py-2"
                 value={modal.data.canchas}
                 onChange={(e) =>
-                  setModal({ ...modal, data: { ...modal.data, canchas: Number(e.target.value) } })
+                  setModal({ ...modal, data: { ...modal.data!, canchas: Number(e.target.value) } })
                 }
               />
             </div>
 
             <div className="flex justify-end gap-3 mt-6">
               <button
-                onClick={() => setModal({ open: false })}
+                onClick={() => setModal({ open: false, modo: "add", data: null })}
                 className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
               >
                 Cancelar

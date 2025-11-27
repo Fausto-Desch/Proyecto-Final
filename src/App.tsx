@@ -1,21 +1,91 @@
-function App() {
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import HomeUser from './pages/HomeUser';
+import { HomeAdmin } from './pages/HomeAdmin';
+import { Clubes } from './pages/ClubesAdmin';
+import ClubesUsuarios from './pages/ClubesUsuarios';
+import ProtectedRoute from './components/ProtectedRoute';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+
+function AppContent() {
+  const { theme } = useTheme();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <div className="text-center p-10 bg-white rounded-xl shadow-lg">
-        <h1 className="text-4xl font-bold text-blue-600 mb-4">
-          ¡Funciona! 🚀
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Tailwind CSS v3 está instalado correctamente.
-        </p>
-        <button className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-          Click me
-        </button>
+    <div className={theme === "dark" ? "dark" : ""}>
+      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+
+            <Route
+              path="/home-admin"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <HomeAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/clubes"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <Clubes />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/home-user"
+              element={
+                <ProtectedRoute allowedRole="user">
+                  <HomeUser />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/clubes-usuario"
+              element={
+                <ProtectedRoute allowedRole="user">
+                  <ClubesUsuarios />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/home"
+              element={
+                <AuthenticatedRoute>
+                  <HomeRedirect />
+                </AuthenticatedRoute>
+              }
+            />
+
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </div>
-  )
+  );
 }
 
-export default App;
+function HomeRedirect() {
+  const role = localStorage.getItem('role');
 
-export default App;
+  if (role === 'admin') return <Navigate to="/home-admin" replace />;
+  if (role === 'user') return <Navigate to="/home-user" replace />;
+  
+  return <Navigate to="/login" replace />;
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}

@@ -12,10 +12,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Si ya está logeado, redirigir al home correspondiente según role
+    // Checkea si esta logueado y redirige según el rol
     const token = authApi.getToken();
     if (token) {
-      const role = authApi.getRole(); // debe devolver 'admin' | 'user' | null (según tu impl)
+      const role = authApi.getRole();
       if (role === 'admin') {
         navigate('/home-admin', { replace: true });
       } else {
@@ -30,20 +30,17 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      // `data` puede ser cualquier shape que retorne tu API; evitamos asumir que incluye `role`
-      const data: any = await authApi.login({ email, password });
+      const data = await authApi.login({ email, password });
 
-      // Guardar lo que haga falta (token, user, role, etc.)
       authApi.saveUserData(data);
 
-      // Obtener role desde authApi (implementación que ya tenés)
       const role = authApi.getRole();
 
-      // Redirigir según role
+
       if (role === 'admin') {
         navigate('/home-admin');
       } else {
-        // usuario estándar
+
         navigate('/home-user');
       }
     } catch (err) {
@@ -105,6 +102,18 @@ export default function LoginPage() {
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            ¿No tenés cuenta?{' '}
+            <button
+              onClick={() => navigate('/register')}
+              className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+            >
+              Registrarse
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
