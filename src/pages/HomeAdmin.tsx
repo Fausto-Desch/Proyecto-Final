@@ -50,7 +50,7 @@ export function HomeAdmin() {
 
                                 {/* Buscar Canchas */}
                                 <div
-                                    onClick={() => navigate('/clubes')}
+                                    onClick={() => navigate('/clubes-usuario')}
                                     className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 cursor-pointer hover:shadow-xl hover:border-green-300 transition group"
                                 >
                                     <div className="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-100 transition">

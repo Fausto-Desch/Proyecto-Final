@@ -5,17 +5,34 @@ import { Footer } from "../components/layout/Footer";
 import { Building2, MapPin, Edit, Trash2, Plus } from "lucide-react";
 import { useState } from "react";
 
+interface Club {
+  id: number;
+  nombre: string;
+  direccion: string;
+  canchas: number;
+}
+
+interface ModalState {
+  open: boolean;
+  modo: "add" | "edit";
+  data: Club | null;
+}
+
 export function Clubes() {
-  const [clubes, setClubes] = useState([
+  const [clubes, setClubes] = useState<Club[]>([
     { id: 1, nombre: "Club Atletico Union", direccion: "Av. Alem 1250", canchas: 3 },
     { id: 2, nombre: "Club Deportivo Bahiense", direccion: "Zapiola 350", canchas: 2 },
     { id: 3, nombre: "Club Estudiantes", direccion: "Colon 75", canchas: 4 },
   ]);
 
-  const [modal, setModal] = useState({ open: false, modo: "add", data: null });
+  const [modal, setModal] = useState<ModalState>({ 
+    open: false, 
+    modo: "add", 
+    data: null 
+  });
 
 
-  const editarClub = (club) => {
+  const editarClub = (club: Club) => {
     setModal({
       open: true,
       modo: "edit",
@@ -30,7 +47,7 @@ export function Clubes() {
     setModal({
       open: true,
       modo: "add",
-      data: { nombre: "", direccion: "", canchas: 0 },
+      data: { id: 0, nombre: "", direccion: "", canchas: 0 },
     });
   };
 
@@ -38,9 +55,11 @@ export function Clubes() {
   // guardar editar y agregar
   // ===============================
   const guardarClub = () => {
+    if (!modal.data) return;
+
     if (modal.modo === "edit") {
       setClubes(
-        clubes.map((c) => (c.id === modal.data.id ? modal.data : c))
+        clubes.map((c) => (c.id === modal.data!.id ? modal.data! : c))
       );
     } else {
       setClubes([
@@ -55,7 +74,7 @@ export function Clubes() {
     setModal({ open: false, modo: "add", data: null });
   };
 
-  const eliminarClub = (id) => {
+  const eliminarClub = (id: number) => {
     setClubes(clubes.filter((club) => club.id !== id));
   };
 
@@ -124,7 +143,7 @@ export function Clubes() {
           ))}
         </div>
 
-        <Link to="/home" className="mt-10 inline-block text-blue-500 hover:underline">
+        <Link to="/home-admin" className="mt-10 inline-block text-blue-500 hover:underline">
           ← Volver al Home
         </Link>
       </div>
@@ -134,7 +153,7 @@ export function Clubes() {
   
       {/* agregar/editar */}
  
-      {modal.open && (
+      {modal.open && modal.data && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center p-4">
           <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
 
@@ -151,7 +170,7 @@ export function Clubes() {
                 className="border rounded-lg px-3 py-2"
                 value={modal.data.nombre}
                 onChange={(e) =>
-                  setModal({ ...modal, data: { ...modal.data, nombre: e.target.value } })
+                  setModal({ ...modal, data: { ...modal.data!, nombre: e.target.value } })
                 }
               />
 
@@ -161,7 +180,7 @@ export function Clubes() {
                 className="border rounded-lg px-3 py-2"
                 value={modal.data.direccion}
                 onChange={(e) =>
-                  setModal({ ...modal, data: { ...modal.data, direccion: e.target.value } })
+                  setModal({ ...modal, data: { ...modal.data!, direccion: e.target.value } })
                 }
               />
 
@@ -171,14 +190,14 @@ export function Clubes() {
                 className="border rounded-lg px-3 py-2"
                 value={modal.data.canchas}
                 onChange={(e) =>
-                  setModal({ ...modal, data: { ...modal.data, canchas: Number(e.target.value) } })
+                  setModal({ ...modal, data: { ...modal.data!, canchas: Number(e.target.value) } })
                 }
               />
             </div>
 
             <div className="flex justify-end gap-3 mt-6">
               <button
-                onClick={() => setModal({ open: false })}
+                onClick={() => setModal({ open: false, modo: "add", data: null })}
                 className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
               >
                 Cancelar

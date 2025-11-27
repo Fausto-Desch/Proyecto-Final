@@ -1,21 +1,88 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import HomeUser from './pages/HomeUser';
+import { HomeAdmin } from './pages/HomeAdmin';
+import { Clubes } from './pages/ClubesAdmin';
+import ClubesUsuarios from './pages/ClubesUsuarios';
+import ProtectedRoute from './components/ProtectedRoute';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <div className="text-center p-10 bg-white rounded-xl shadow-lg">
-        <h1 className="text-4xl font-bold text-blue-600 mb-4">
-          ¡Funciona! 🚀
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Tailwind CSS v3 está instalado correctamente.
-        </p>
-        <button className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-          Click me
-        </button>
-      </div>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* Redirigir raíz al login */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Rutas públicas */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {/* Rutas protegidas para ADMIN */}
+        <Route
+          path="/home-admin"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <HomeAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/clubes"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <Clubes />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Rutas protegidas para USER */}
+        <Route
+          path="/home-user"
+          element={
+            <ProtectedRoute allowedRole="user">
+              <HomeUser />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/clubes-usuario"
+          element={
+            <ProtectedRoute allowedRole="user">
+              <ClubesUsuarios />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Ruta genérica /home - redirige según rol */}
+        <Route
+          path="/home"
+          element={
+            <AuthenticatedRoute>
+              <HomeRedirect />
+            </AuthenticatedRoute>
+          }
+        />
+
+        {/* Ruta no encontrada */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App;
+// Componente para redirigir /home según el rol
+function HomeRedirect() {
+  const role = localStorage.getItem('role');
+  
+  if (role === 'admin') {
+    return <Navigate to="/home-admin" replace />;
+  } else if (role === 'user') {
+    return <Navigate to="/home-user" replace />;
+  }
+  
+  return <Navigate to="/login" replace />;
+}
 
 export default App;
