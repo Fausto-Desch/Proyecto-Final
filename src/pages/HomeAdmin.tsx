@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/layout/Navbar';
 import { Sidebar } from '../components/layout/Sidebar';
 import { Footer } from '../components/layout/Footer';
-import { Building2, Search, Megaphone } from 'lucide-react';
+import { Building2, Megaphone } from 'lucide-react';
 
 export function HomeAdmin() {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-100">
+        <div className="flex flex-col min-h-screen bg-gray-100 animate-fade-in">
             <Navbar />
 
             <div className="flex flex-1">
@@ -47,21 +47,6 @@ export function HomeAdmin() {
                                         Gestionar canchas, horarios y precios de los clubes adheridos.
                                     </p>
                                 </div>
-
-                                {/* Buscar Canchas */}
-                                <div
-                                    onClick={() => navigate('/clubes-usuario')}
-                                    className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 cursor-pointer hover:shadow-xl hover:border-green-300 transition group"
-                                >
-                                    <div className="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-100 transition">
-                                        <Search className="w-7 h-7 text-green-600" />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-gray-800 mb-2">Buscar Canchas</h3>
-                                    <p className="text-gray-500">
-                                        Encontrar canchas disponibles para reservar turnos.
-                                    </p>
-                                </div>
-
                             </div>
                         </div>
                     </div>
