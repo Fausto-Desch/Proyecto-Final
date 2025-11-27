@@ -1,3 +1,4 @@
+//Listado de clubes para admins
 import { Link } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";

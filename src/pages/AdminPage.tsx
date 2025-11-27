@@ -1,3 +1,4 @@
+//Solo para Administradores
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../api/authApi';
 
@@ -34,3 +35,4 @@ export default function AdminPage() {
     </div>
   );
 }
+
