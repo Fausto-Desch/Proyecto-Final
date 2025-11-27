@@ -7,7 +7,7 @@ export function Footer() {
 
         {/* Texto izquierdo */}
         <p className="text-xs text-gray-500 tracking-wide mb-4 md:mb-0">
-          © 2025 Proyecto Final – TUP. Todos los derechos reservados.
+          © 2025 Sport manager – TUP. Todos los derechos reservados.
         </p>
 
         {/* Íconos de redes sociales */}

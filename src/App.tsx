@@ -7,7 +7,8 @@ import { Clubes } from './pages/ClubesAdmin';
 import ClubesUsuarios from './pages/ClubesUsuarios';
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+
+import { ThemeProvider, useTheme } from "./context/ThemaContext";
 
 function AppContent() {
   const { theme } = useTheme();
