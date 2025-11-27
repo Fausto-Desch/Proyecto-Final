@@ -7,82 +7,85 @@ import { Clubes } from './pages/ClubesAdmin';
 import ClubesUsuarios from './pages/ClubesUsuarios';
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 
-function App() {
+function AppContent() {
+  const { theme } = useTheme();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Redirigir raíz al login */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+    <div className={theme === "dark" ? "dark" : ""}>
+      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* Rutas públicas */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-        {/* Rutas protegidas para ADMIN */}
-        <Route
-          path="/home-admin"
-          element={
-            <ProtectedRoute allowedRole="admin">
-              <HomeAdmin />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/clubes"
-          element={
-            <ProtectedRoute allowedRole="admin">
-              <Clubes />
-            </ProtectedRoute>
-          }
-        />
+            <Route
+              path="/home-admin"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <HomeAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/clubes"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <Clubes />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* Rutas protegidas para USER */}
-        <Route
-          path="/home-user"
-          element={
-            <ProtectedRoute allowedRole="user">
-              <HomeUser />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/clubes-usuario"
-          element={
-            <ProtectedRoute allowedRole="user">
-              <ClubesUsuarios />
-            </ProtectedRoute>
-          }
-        />
+            <Route
+              path="/home-user"
+              element={
+                <ProtectedRoute allowedRole="user">
+                  <HomeUser />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/clubes-usuario"
+              element={
+                <ProtectedRoute allowedRole="user">
+                  <ClubesUsuarios />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* Ruta genérica /home - redirige según rol */}
-        <Route
-          path="/home"
-          element={
-            <AuthenticatedRoute>
-              <HomeRedirect />
-            </AuthenticatedRoute>
-          }
-        />
+            <Route
+              path="/home"
+              element={
+                <AuthenticatedRoute>
+                  <HomeRedirect />
+                </AuthenticatedRoute>
+              }
+            />
 
-        {/* Ruta no encontrada */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </BrowserRouter>
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   );
 }
 
-// Componente para redirigir /home según el rol
 function HomeRedirect() {
   const role = localStorage.getItem('role');
-  
-  if (role === 'admin') {
-    return <Navigate to="/home-admin" replace />;
-  } else if (role === 'user') {
-    return <Navigate to="/home-user" replace />;
-  }
+
+  if (role === 'admin') return <Navigate to="/home-admin" replace />;
+  if (role === 'user') return <Navigate to="/home-user" replace />;
   
   return <Navigate to="/login" replace />;
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
