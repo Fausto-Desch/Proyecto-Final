@@ -1,52 +1,34 @@
 import { Menu, LogOut, Trophy, Sun, Moon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../../api/authApi';
-import { useEffect, useState } from 'react';
+import { useTheme } from "../../context/ThemaContext";
 
 export function Navbar() {
     const navigate = useNavigate();
     const userName = authApi.getUserName();
+
+    // ThemeContext (única fuente de verdad)
+    const { theme, toggleTheme } = useTheme();
 
     const handleLogout = () => {
         authApi.logout();
         navigate('/login');
     };
 
-    // Ir al home según rol
     const goHome = () => {
         const role = authApi.getRole();
         navigate(role === 'admin' ? '/home-admin' : '/home-user');
     };
 
-    // ---------------------------
-    // modo oscuro
-    // ---------------------------
-    const [theme, setTheme] = useState(
-        localStorage.getItem("theme") || "light"
-    );
-
-    useEffect(() => {
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
-        localStorage.setItem("theme", theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(prev => prev === "dark" ? "light" : "dark");
-    };
-
     return (
         <nav className="bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm sticky top-0 z-50 transition-colors">
+            {/* LOGO + BOTÓN MENÚ */}
             <div className="flex items-center gap-3">
-                {/* Botón menú hamburguesa (móvil) */}
                 <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg lg:hidden transition-colors">
                     <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
                 </button>
 
-                {/* logo */}
+                {/* LOGO */}
                 <div 
                     className="flex items-center gap-2.5 cursor-pointer group" 
                     onClick={goHome}
@@ -66,10 +48,10 @@ export function Navbar() {
                 </div>
             </div>
 
-            {/* Derecha */}
+            {/* ICONOS DERECHA */}
             <div className="flex items-center gap-4">
 
-                {/* modo oscuro */}
+                {/* MODO OSCURO */}
                 <button
                     onClick={toggleTheme}
                     className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
@@ -82,14 +64,17 @@ export function Navbar() {
                     )}
                 </button>
 
+                {/* NOMBRE DE USUARIO */}
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:block">
                     {userName || 'Usuario'}
                 </span>
                 
+                {/* CÍRCULO CON INICIAL */}
                 <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 rounded-full flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold shadow-sm">
                     {userName?.[0]?.toUpperCase() || 'U'}
                 </div>
 
+                {/* LOGOUT */}
                 <button
                     onClick={handleLogout}
                     className="p-2 hover:bg-red-50 dark:hover:bg-red-900/40 rounded-lg transition-all duration-200 text-gray-400 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 group"
