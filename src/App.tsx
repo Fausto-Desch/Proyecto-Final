@@ -5,7 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import HomeUser from './pages/HomeUser';
 import { HomeAdmin } from './pages/HomeAdmin';
 import { Clubes } from './pages/ClubesAdmin';
-import ClubesUsuarios from './pages/ClubesUsuarios';
+import ClubesUsuario from './pages/ClubesUsuario';
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
@@ -15,6 +15,8 @@ import { ThemeProvider, useTheme } from "./context/ThemaContext";
 
 import { CanchasAdmin } from './pages/CanchasAdmin'; 
 import CanchasUsuario from './pages/CanchasUsuario';
+import HorariosUsuario from './pages/HorariosUsuario';
+import HorariosAdmin from './pages/HorariosAdmin';
 
 function AppContent() {
   const { theme } = useTheme();
@@ -62,6 +64,14 @@ function AppContent() {
 
             {/* RUTAS DE USUARIO */}
             <Route
+              path="/horarios-admin/:turnoId"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <HorariosAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/home-user"
               element={
                 <ProtectedRoute allowedRole="user">
@@ -73,7 +83,7 @@ function AppContent() {
               path="/clubes-usuario"
               element={
                 <ProtectedRoute allowedRole="user">
-                  <ClubesUsuarios />
+                  <ClubesUsuario />
                 </ProtectedRoute>
               }
             />
@@ -87,6 +97,14 @@ function AppContent() {
             />
 
             {/* RUTA DE REDIRECCIÓN */}
+            <Route
+              path="/horarios-usuario/:turnoId"
+              element={
+                <ProtectedRoute allowedRole="user">
+                  <HorariosUsuario />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/home"
               element={
