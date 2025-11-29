@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
-import { Building2, MapPin, Edit, Trash2, Plus } from "lucide-react";
+import { Building2, MapPin, Edit, Trash2, Plus, LayoutGrid } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
@@ -115,12 +115,13 @@ export function Clubes() {
                 <span className="font-bold">{club.canchas}</span> canchas disponibles
               </p>
 
-              <Link
-                to={`/club/${club.id}/canchas`}
-                className="w-full text-center bg-blue-500 text-white py-2 rounded-lg shadow hover:bg-blue-600 transition"
-              >
-                Ver Canchas
-              </Link>
+            <Link
+                to={`/clubes/${club.id}/canchas`}
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-2.5 rounded-xl shadow hover:bg-blue-700 transition mb-4"
+            >
+                <LayoutGrid size={18} /> {/* Importar LayoutGrid de lucide-react */}
+                Gestionar Canchas
+            </Link>
 
               <div className="flex justify-between mt-4">
                 <button

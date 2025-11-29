@@ -9,6 +9,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
 import { ThemeProvider, useTheme } from "./context/ThemaContext";
+import { CanchasAdmin } from './pages/CanchasAdmin';
+import CanchasUsuario from './pages/CanchasUsuario';
 
 function AppContent() {
   const { theme } = useTheme();
@@ -39,7 +41,14 @@ function AppContent() {
                 </ProtectedRoute>
               }
             />
-
+            <Route
+              path="/clubes/:clubId/canchas"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <CanchasAdmin />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/home-user"
               element={
@@ -56,7 +65,14 @@ function AppContent() {
                 </ProtectedRoute>
               }
             />
-
+            <Route
+              path="/clubes-usuario/:clubId/canchas"
+              element={
+                <ProtectedRoute allowedRole="user">
+                  <CanchasUsuario />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/home"
               element={
