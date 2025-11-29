@@ -1,7 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
-import { LayoutGrid, Trophy, DollarSign, Edit, Trash2, Plus, ArrowLeft, Ruler, Goal, LandPlot } from "lucide-react";
+import { LayoutGrid, Trophy, DollarSign, Edit, Trash2, Plus, ArrowLeft, Ruler, Clock } from "lucide-react";
 import { useState } from "react";
 
 interface Turno {
@@ -26,6 +26,7 @@ interface ModalState {
 
 export function CanchasAdmin() {
     const { clubId } = useParams();
+    const navigate = useNavigate();
 
     const [canchas, setCanchas] = useState<Cancha[]>([
         {
@@ -84,6 +85,11 @@ export function CanchasAdmin() {
         setCanchas(canchas.filter((c) => c.id !== id));
     };
 
+    // Navegar a la vista de horarios del administrador
+    const handleVerHorarios = (turnoId: string) => {
+        navigate(`/horarios-admin/${turnoId}`);
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
         <Navbar />
@@ -135,6 +141,12 @@ export function CanchasAdmin() {
                 </div>
 
                 <div className="flex gap-3 mt-auto">
+                    <button
+                    onClick={() => handleVerHorarios(cancha.turno.id)}
+                    className="flex-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 py-2 rounded-lg flex justify-center items-center gap-2 hover:bg-green-100 dark:hover:bg-green-900/40 transition"
+                    >
+                    <Clock size={16} /> Horarios
+                    </button>
                     <button
                     onClick={() => editarCancha(cancha)}
                     className="flex-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 py-2 rounded-lg flex justify-center items-center gap-2 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition"
@@ -202,11 +214,11 @@ export function CanchasAdmin() {
 
                 <div className="space-y-4 mb-6 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
                 <h3 className="text-sm font-bold text-blue-500 uppercase border-b border-blue-100 dark:border-gray-600 pb-1 flex items-center gap-2">
-                    <LandPlot size={14}/> Datos del Turno
+                    Datos del Turno
                 </h3>
                 
                 <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400">Descripción del Turno (ej: Alquiler Hora)</label>
+                    <label className="text-xs text-gray-500 dark:text-gray-400">Descripción del Turno</label>
                     <input 
                         className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" 
                         value={modal.data.turno.descripcionTurno} 
@@ -214,7 +226,7 @@ export function CanchasAdmin() {
                             ...modal, 
                             data: {
                                 ...modal.data!, 
-                                turno: { ...modal.data!.turno, descripcionTurno: e.target.value } // Actualización anidada
+                                turno: { ...modal.data!.turno, descripcionTurno: e.target.value }
                             }
                         })}
                     />
@@ -229,7 +241,7 @@ export function CanchasAdmin() {
                             ...modal, 
                             data: {
                                 ...modal.data!, 
-                                turno: { ...modal.data!.turno, costo: Number(e.target.value) } // Actualización anidada
+                                turno: { ...modal.data!.turno, costo: Number(e.target.value) }
                             }
                         })}
                     />

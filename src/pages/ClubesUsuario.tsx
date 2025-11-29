@@ -5,7 +5,7 @@ import { Footer } from "../components/layout/Footer";
 import { Building2, MapPin, ArrowLeft, LayoutGrid } from "lucide-react";
 import { useState } from "react";
 
-export default function ClubesUsuarios() {
+export default function ClubesUsuario() {
   const [clubes] = useState([
     { id: 1, nombre: "Club Atletico Union", direccion: "Av. Alem 1250", canchas: 3 },
     { id: 2, nombre: "Club Deportivo Bahiense", direccion: "Zapiola 350", canchas: 2 },
