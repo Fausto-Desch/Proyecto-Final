@@ -50,10 +50,11 @@ El usuario puede: - 🔍 Buscar canchas\
 - 📅 Ver disponibilidad\
 - 🕒 Reservar horarios\
 - 🚪 Cerrar sesión
-![Login](./screenshots/HomeUser.png)
-![Login](./screenshots/ListadoHorariosUser.png)
-![Login](./screenshots/ListadoCanchaUser.png)
-![Login](./screenshots/ClubUser.png)
+![Home User](./screenshots/HomeUser.png)
+![Listado Horarios User](./screenshots/ListadoHorariosUser.png)
+![Listado Cancha User](./screenshots/ListadoCanchaUser.png)
+![Club User](./screenshots/ClubUser.png)
+
 
 `![Home User](./screenshots/home-user.png)`
 
@@ -70,13 +71,13 @@ El Administrador puede: - Gestionar Clubes\
 - Crear turnos manualmente\
 - Gestionar horarios en detalle
 
-![Login](./screenshots/HomeAdmin.png)
-![Login](./screenshots/ListadoClubAdmin.png)
-![Login](./screenshots/GestionClubAdmin.png)
-![Login](./screenshots/EditarCanchaAdmin.png)
-![Login](./screenshots/NuevaCanchaAdmin.png)
-![Login](./screenshots/ListadoHorarioAdmin.png)
-![Login](./screenshots/NuevaCanchaAdmin.png)
+![Home Admin](./screenshots/HomeAdmin.png)
+![Listado de Clubes](./screenshots/ListadoClubAdmin.png)
+![Gestión de Club](./screenshots/GestionClubAdmin.png)
+![Editar Cancha](./screenshots/EditarCanchaAdmin.png)
+![Nueva Cancha](./screenshots/NuevaCanchaAdmin.png)
+![Listado de Horarios](./screenshots/ListadoHorarioAdmin.png)
+
 
 
 `![Home Admin](./screenshots/home-admin.png)`\
