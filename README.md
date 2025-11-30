@@ -56,7 +56,7 @@ El usuario puede: - 🔍 Buscar canchas\
 ![Club User](./screenshots/ClubUser.png)
 
 
-`![Home User](./screenshots/home-user.png)`
+
 
 ------------------------------------------------------------------------
 
@@ -80,8 +80,7 @@ El Administrador puede: - Gestionar Clubes\
 
 
 
-`![Home Admin](./screenshots/home-admin.png)`\
-`![Horarios Admin](./screenshots/horarios-admin.png)`
+
 
 ------------------------------------------------------------------------
 
