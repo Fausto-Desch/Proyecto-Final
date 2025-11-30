@@ -28,7 +28,7 @@ pueden controlar canchas, precios, agenda diaria y reservas.
 
 ### 👤 **Jugador / Usuario**
 
-#![alt text](image.png)
+![Login](./screenshots/Captura de pantalla 2025-11-30 184908.png)
 
 -   **Email:** `user@test.com`
 -   **Contraseña:** `user123`
