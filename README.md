@@ -1,101 +1,139 @@
-# ⚽ Plataforma de Gestión y Reserva de Canchas — Frontend
+# ⚽ **Plataforma de Gestión y Reserva de Canchas --- Frontend**
 
-## 📌 Proyecto Final — Tecnicatura Universitaria en Programación
+### 📌 *Proyecto Final --- Tecnicatura Universitaria en Programación (TUP)*
 
----
+Este repositorio contiene el **Frontend** de la plataforma web para la
+gestión y reserva de canchas deportivas en Bahía Blanca y alrededores.
+El proyecto moderniza y digitaliza procesos que tradicionalmente se
+realizaban por **WhatsApp o Excel**, centralizando operaciones y
+mejorando la experiencia tanto de jugadores como de administradores de
+clubes.
 
-## 📖 Descripción
+------------------------------------------------------------------------
 
-Este repositorio contiene el **Frontend** del Proyecto Final académico.  
-La aplicación es una plataforma web moderna que digitaliza la gestión de **reservas deportivas** en Bahía Blanca y alrededores.
+# 📖 **Descripción General**
 
-El sistema reemplaza procesos manuales (Excel/WhatsApp) permitiendo:
+La aplicación permite que jugadores vean disponibilidad, reserven turnos
+y gestionen sus horarios, mientras que los administradores de clubes
+pueden controlar canchas, precios, agenda diaria y reservas.
 
-✅ Reservas online en tiempo real  
-✅ Administración centralizada de clubes  
-✅ Optimización del flujo operativo
+✔ Reservas online en tiempo real\
+✔ Gestión completa de clubes y canchas\
+✔ Organización automática del cronograma\
+✔ Interfaz moderna y adaptable
 
----
+------------------------------------------------------------------------
 
-## 🚀 Tecnologías Utilizadas
+# 🔐 **Usuarios de Prueba**
 
-### **Core**
-- React.js 18
-- TypeScript
-- Vite
+### 👤 **Jugador / Usuario**
 
-### **UI & Estilos**
-- Tailwind CSS 3
-- Lucide React
-- Clsx + Tailwind-merge
+#![alt text](image.png)
 
-### **Routing & Estado**
-- React Router DOM 6
-- Context API / Custom Hooks *(en uso / a implementar)*
+-   **Email:** `user@test.com`
+-   **Contraseña:** `user123`
 
----
+### 🛠️ **Administrador**
 
-## 🔐 Roles y Funcionalidades
+-   **Email:** `admin@test.com`
+-   **Contraseña:** `admin123`
 
-### 👤 **Usuario Jugador — `User`**
-**Acceso:** `/user`
+------------------------------------------------------------------------
 
-- Buscador inteligente por ubicación, fecha y deporte
-- Disponibilidad en tiempo real
-- Reserva de turnos *(en desarrollo)*
-- Historial de reservas *(próximamente)*
+# 🧑‍🤝‍🧑 **Roles y Funcionalidades**
 
-### 🏟️ **Administrador de Club — `Admin`**
-**Acceso:** `/admin` y `/clubes`
+## ⚽ **Rol Jugador --- User**
 
-- ABM de clubes
-- Gestión de canchas, precios y características
-- Agenda completa, bloqueo de horarios, reservas manuales
+Acceso desde: `/login` → `/home-user`
 
----
+El usuario puede: - 🔍 Buscar canchas\
+- 📅 Ver disponibilidad\
+- 🕒 Reservar horarios\
+- 🚪 Cerrar sesión
+#![alt text](image-8.png)
+#![alt text](image-9.png)
+#![alt text](image-10.png)
+#![alt text](image-11.png)
 
-## 📂 Estructura del Proyecto
+`![Home User](./screenshots/home-user.png)`
 
-src/
-├── components/
-│ ├── layout/
-│ ├── ui/
-│ ├── ProtectedRoute.tsx
-│ └── AuthenticatedRoute.tsx
-├── pages/
-│ ├── Login.tsx
-│ ├── Home.tsx
-│ ├── UserPage.tsx
-│ ├── AdminPage.tsx
-│ └── Clubes.tsx
-├── routes/
-├── services/
-├── types/
-└── App.tsx
+------------------------------------------------------------------------
 
----
----
+## 🏟️ **Rol Administrador --- Admin**
 
-## 🛠️ Instalación y Ejecución
+Acceso desde: `/home-admin`
 
-### 1️⃣ Clonar el repositorio
----
-```bash
+El Administrador puede: - Gestionar Clubes\
+- Administrar Canchas\
+- Manejar Agenda diaria\
+- Confirmar o eliminar reservas\
+- Crear turnos manualmente\
+- Gestionar horarios en detalle
+
+#![alt text](image-1.png)
+#![alt text](image-2.png)
+#![alt text](image-3.png)
+#![alt text](image-4.png)
+#![alt text](image-5.png)
+#![alt text](image-6.png)
+#![alt text](image-7.png)
+
+
+`![Home Admin](./screenshots/home-admin.png)`\
+`![Horarios Admin](./screenshots/horarios-admin.png)`
+
+------------------------------------------------------------------------
+
+# 🖥️ **Tecnologías Utilizadas**
+
+-   React 18\
+-   TypeScript\
+-   Vite\
+-   TailwindCSS\
+-   Lucide React\
+-   React Router DOM\
+-   Context API
+
+------------------------------------------------------------------------
+
+# 📂 **Estructura**
+
+    src/
+     ├── components/
+     ├── pages/
+     ├── context/
+     ├── routes/
+     ├── services/
+     ├── types/
+     └── App.tsx
+
+------------------------------------------------------------------------
+
+# 🛠️ Instalación
+
+``` bash
 git clone <URL_DEL_REPOSITORIO>
-cd Proyecto-Final
-2️⃣ Instalar dependencias
-
-Requiere Node.js 16+
-
 npm install
-
-3️⃣ Ejecutar en desarrollo
 npm run dev
-
-
-Aplicación disponible en:
-👉 http://localhost:5173/
 ```
----
 
+------------------------------------------------------------------------
+
+# 📸 **Espacios para Capturas**
+
+-   Login\
+-   Home Usuario\
+-   Home Admin\
+-   Gestión de Canchas\
+-   Gestión de Horarios\
+-   Reserva desde el usuario\
+-   Responsive
+
+------------------------------------------------------------------------
+
+# 📌 Notas Finales
+
+-   Integración completa con backend Node/Express\
+-   Proyecto presentado como Trabajo Final de la TUP\
+-   Diseño responsivo, pensado para uso real
 
