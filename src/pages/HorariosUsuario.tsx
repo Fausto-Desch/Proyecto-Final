@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
-import { ArrowLeft, Clock, Calendar, /*MapPin*/ } from "lucide-react";
+import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { useState } from "react";
 
 interface Horario {
@@ -13,8 +13,7 @@ interface Horario {
 
 export default function HorariosUsuario() {
   const { turnoId } = useParams();
-  
-  // Datos mock de horarios - en memoria
+
   const [horarios] = useState<Horario[]>([
     { id: "1", fecha: "2024-12-01", hora: "10:00", disponible: true },
     { id: "2", fecha: "2024-12-01", hora: "12:00", disponible: true },
@@ -23,9 +22,8 @@ export default function HorariosUsuario() {
     { id: "5", fecha: "2024-12-02", hora: "18:00", disponible: true },
   ]);
 
-  const handleReservar = (horarioId: string) => {
-    // Lógica de reserva (a implementar en el futuro)
-    alert(`Reservando horario ${horarioId} - Funcionalidad en desarrollo`);
+  const handleSolicitar = (horarioId: string) => {
+    alert(`Solicitud enviada para el horario ${horarioId}.`);
   };
 
   return (
@@ -51,19 +49,19 @@ export default function HorariosUsuario() {
               <div
                 key={horario.id}
                 className={`bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border transition-all ${
-                  horario.disponible 
-                    ? "border-green-200 dark:border-green-800 hover:shadow-lg" 
-                    : "border-gray-200 dark:border-gray-700 opacity-60"
+                  horario.disponible
+                    ? "border-blue-200 dark:border-blue-800 hover:shadow-lg"
+                    : "border-gray-300 dark:border-gray-700 opacity-60"
                 }`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-blue-500" />
                     <span className="font-semibold text-gray-800 dark:text-white">
-                      {new Date(horario.fecha).toLocaleDateString('es-ES')}
+                      {new Date(horario.fecha).toLocaleDateString("es-ES")}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-gray-500" />
                     <span className="text-gray-700 dark:text-gray-300 font-medium">
@@ -73,24 +71,26 @@ export default function HorariosUsuario() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                    horario.disponible
-                      ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
-                      : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
-                  }`}>
+                  <span
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                      horario.disponible
+                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                        : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+                    }`}
+                  >
                     {horario.disponible ? "Disponible" : "Ocupado"}
                   </span>
 
                   <button
-                    onClick={() => handleReservar(horario.id)}
+                    onClick={() => handleSolicitar(horario.id)}
                     disabled={!horario.disponible}
                     className={`px-4 py-2 rounded-lg font-medium transition-all ${
                       horario.disponible
-                        ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/20"
-                        : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+                        ? "border border-blue-400 text-blue-600 dark:text-blue-400 dark:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900"
+                        : "bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed"
                     }`}
                   >
-                    Reservar
+                    Solicitar
                   </button>
                 </div>
               </div>
@@ -110,7 +110,6 @@ export default function HorariosUsuario() {
               Volver a Canchas
             </Link>
           </div>
-
         </div>
       </div>
 
