@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 interface Horario {
@@ -14,6 +14,8 @@ interface Horario {
 export default function HorariosUsuario() {
   const { turnoId } = useParams();
 
+  const telefonoClub = "5492923659973"; 
+
   const [horarios] = useState<Horario[]>([
     { id: "1", fecha: "2024-12-01", hora: "10:00", disponible: true },
     { id: "2", fecha: "2024-12-01", hora: "12:00", disponible: true },
@@ -22,8 +24,21 @@ export default function HorariosUsuario() {
     { id: "5", fecha: "2024-12-02", hora: "18:00", disponible: true },
   ]);
 
-  const handleSolicitar = (horarioId: string) => {
-    alert(`Solicitud enviada para el horario ${horarioId}.`);
+  const handleSolicitarWhatsApp = (horario: Horario) => {
+    // 1. Crear el mensaje personalizado con los datos del turno
+    const mensaje = `Hola!  Quisiera solicitar una reserva para el turno con ID: ${turnoId}.
+  Fecha: ${new Date(horario.fecha).toLocaleDateString("es-ES")}
+  Hora: ${horario.hora}hs.
+¿Me podrían confirmar disponibilidad?`;
+
+    // 2. Codificar el mensaje para URL
+    const mensajeCodificado = encodeURIComponent(mensaje);
+
+    // 3. Crear el link de WhatsApp (API oficial)
+    const url = `https://wa.me/${telefonoClub}?text=${mensajeCodificado}`;
+
+    // 4. Abrir en nueva pestaña
+    window.open(url, "_blank");
   };
 
   return (
@@ -50,13 +65,13 @@ export default function HorariosUsuario() {
                 key={horario.id}
                 className={`bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border transition-all ${
                   horario.disponible
-                    ? "border-blue-200 dark:border-blue-800 hover:shadow-lg"
+                    ? "border-green-200 dark:border-green-800 hover:shadow-lg"
                     : "border-gray-300 dark:border-gray-700 opacity-60"
                 }`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-blue-500" />
+                    <Calendar className="w-5 h-5 text-green-600 dark:text-green-400" />
                     <span className="font-semibold text-gray-800 dark:text-white">
                       {new Date(horario.fecha).toLocaleDateString("es-ES")}
                     </span>
@@ -74,7 +89,7 @@ export default function HorariosUsuario() {
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                       horario.disponible
-                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                        ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
                         : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
                     }`}
                   >
@@ -82,15 +97,16 @@ export default function HorariosUsuario() {
                   </span>
 
                   <button
-                    onClick={() => handleSolicitar(horario.id)}
+                    onClick={() => handleSolicitarWhatsApp(horario)}
                     disabled={!horario.disponible}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
                       horario.disponible
-                        ? "border border-blue-400 text-blue-600 dark:text-blue-400 dark:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900"
+                        ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/20"
                         : "bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed"
                     }`}
                   >
-                    Solicitar
+                    <MessageCircle size={18} />
+                    {horario.disponible ? "Solicitar turno" : "Ocupado"}
                   </button>
                 </div>
               </div>
@@ -101,7 +117,7 @@ export default function HorariosUsuario() {
           <div className="mt-10">
             <Link
               to="/clubes-usuario"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-medium shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 transition-all group"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-medium shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-green-600 transition-all group"
             >
               <ArrowLeft
                 size={18}
