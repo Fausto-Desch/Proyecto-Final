@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomeUser from './pages/HomeUser';
 import { HomeAdmin } from './pages/HomeAdmin';
+import { HomeOwner } from './pages/HomeOwner'; // <--- 1. Importamos la nueva vista
 import { Clubes } from './pages/ClubesAdmin';
 import ClubesUsuario from './pages/ClubesUsuario';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -36,7 +37,7 @@ function AppContent() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-            {/* RUTAS DE ADMINISTRADOR */}
+            {/* --- RUTAS DE ADMINISTRADOR (SUPER ADMIN) --- */}
             <Route
               path="/home-admin"
               element={
@@ -53,6 +54,7 @@ function AppContent() {
                 </ProtectedRoute>
               }
             />
+            {/* Esta ruta se reutiliza tanto para el Super Admin como para el Dueño del Club */}
             <Route
               path="/clubes/:clubId/canchas"
               element={
@@ -62,7 +64,17 @@ function AppContent() {
               }
             />
 
-            {/* RUTAS DE USUARIO */}
+            {/* --- RUTA DE DUEÑO DEL CLUB (NUEVA) --- */}
+            <Route
+              path="/panel-club"
+              element={
+                <ProtectedRoute allowedRole="admin"> {/* Usamos 'admin' por ahora */}
+                  <HomeOwner />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* --- RUTAS DE USUARIO --- */}
             <Route
               path="/horarios-admin/:turnoId"
               element={
@@ -126,6 +138,9 @@ function HomeRedirect() {
   const role = localStorage.getItem('role');
 
   if (role === 'admin') return <Navigate to="/home-admin" replace />;
+  // Nota: Si en el futuro creas un rol "owner" real en el backend, 
+  // agregarías: if (role === 'owner') return <Navigate to="/panel-club" replace />;
+  
   if (role === 'user') return <Navigate to="/home-user" replace />;
   
   return <Navigate to="/login" replace />;
