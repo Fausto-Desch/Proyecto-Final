@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomeUser from './pages/HomeUser';
 import { HomeAdmin } from './pages/HomeAdmin';
-import { HomeOwner } from './pages/HomeOwner'; // <--- 1. Importamos la nueva vista
+import { HomeOwner } from './pages/HomeOwner'; 
 import { Clubes } from './pages/ClubesAdmin';
 import ClubesUsuario from './pages/ClubesUsuario';
 import ProtectedRoute from './components/ProtectedRoute';
