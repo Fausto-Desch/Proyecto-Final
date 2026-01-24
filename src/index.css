@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Arreglo global para inputs usando CSS estándar */
+@layer base {
+  input, select, textarea {
+    /* Estilos base (Modo Claro) */
+    color: #111827;            /* text-gray-900 */
+    background-color: #ffffff; /* bg-white */
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.5rem;     /* rounded-lg */
+    padding: 0.5rem 0.75rem;   /* px-3 py-2 */
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  /* Efecto al hacer clic (Focus) */
+  input:focus, select:focus, textarea:focus {
+    border-color: #3b82f6;      /* blue-500 */
+    box-shadow: 0 0 0 2px #3b82f6; /* ring-2 ring-blue-500 */
+  }
+
+  /* Estilos para Modo Oscuro (.dark) */
+  :is(.dark input), :is(.dark select), :is(.dark textarea) {
+    background-color: #374151;  /* bg-gray-700 */
+    color: #ffffff;             /* text-white */
+    border-color: #4b5563;      /* border-gray-600 */
+  }
+
+  /* Color del texto de ayuda (placeholder) en modo oscuro */
+  :is(.dark input)::placeholder, 
+  :is(.dark textarea)::placeholder {
+    color: #9ca3af;             /* placeholder-gray-400 */
+  }
+}
+
+/* Clase opcional .input-std (si la necesitas) */
+@layer components {
+  .input-std {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    outline: none;
+  }
+  
+  .input-std:focus {
+    box-shadow: 0 0 0 2px #3b82f6;
+  }
+}

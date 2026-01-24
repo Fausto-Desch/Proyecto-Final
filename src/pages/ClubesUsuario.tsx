@@ -1,86 +1,90 @@
-// Listado de clubes para usuarios
 import { Link } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
-import { Building2, MapPin, ArrowLeft, LayoutGrid } from "lucide-react";
-import { useState } from "react";
+import { Building2, MapPin, ArrowLeft, Phone, Mail, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { clubApi, type Club } from "../api/clubApi";
 
 export default function ClubesUsuario() {
-  const [clubes] = useState([
-    { id: 1, nombre: "Club Atletico Union", direccion: "Av. Alem 1250", canchas: 3 },
-    { id: 2, nombre: "Club Deportivo Bahiense", direccion: "Zapiola 350", canchas: 2 },
-    { id: 3, nombre: "Club Estudiantes", direccion: "Colon 75", canchas: 4 },
-  ]);
+  const [clubes, setClubes] = useState<Club[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // 1. Traemos los datos REALES del backend
+  useEffect(() => {
+    const fetchClubes = async () => {
+      try {
+        const data = await clubApi.getAll();
+        setClubes(data);
+      } catch (error) {
+        console.error("Error cargando clubes:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchClubes();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       <Navbar />
 
       <div className="flex-1 p-10 relative">
-
-        <h1 className="text-3xl font-bold text-blue-500 dark:text-blue-300 mb-4">
+        <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4">
           Clubes Disponibles
         </h1>
-
         <p className="text-gray-600 dark:text-gray-300 mb-8">
           Selecciona un club para ver sus canchas disponibles.
         </p>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {clubes.map((club) => (
-            <div
-              key={club.id}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow 
-                        p-6 flex flex-col border border-gray-200 
-                        dark:border-gray-700 transition"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <Building2 className="text-blue-400 dark:text-blue-300" size={26} />
-                <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-                  {club.nombre}
-                </h2>
-              </div>
-
-              <div className="flex items-center text-gray-600 dark:text-gray-400 gap-2 mb-1">
-                <MapPin size={16} /> {club.direccion}
-              </div>
-
-              <p className="text-gray-700 dark:text-gray-300 mb-4">
-                <span className="font-bold">{club.canchas}</span> canchas disponibles
-              </p>
-
-              <Link
-                to={`/clubes-usuario/${club.id}/canchas`} 
-                className="w-full text-center bg-blue-500 dark:bg-blue-600 text-white py-2 rounded-lg shadow hover:bg-blue-600 transition"
+        {loading ? (
+          <p className="text-center dark:text-white">Cargando clubes...</p>
+        ) : clubes.length === 0 ? (
+          <div className="text-center p-10 bg-white dark:bg-gray-800 rounded-xl shadow">
+            <p className="text-gray-500">No hay clubes registrados en el sistema por el momento.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {clubes.map((club) => (
+              <div
+                key={club.id}
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 flex flex-col border border-gray-200 dark:border-gray-700 transition hover:shadow-lg"
               >
-                Ver Canchas
-              </Link>
-            </div>
-          ))}
-        </div>
+                <div className="flex items-center gap-3 mb-3">
+                  <Building2 className="text-blue-500" size={26} />
+                  <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                    {club.nombreClub}
+                  </h2>
+                </div>
 
-        {/* BOTÓN VOLVER */}
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-2 mb-4">
+                  <div className="flex items-center gap-2"><MapPin size={16} /> {club.direccion}</div>
+                  <div className="flex items-center gap-2"><Phone size={16} /> {club.telefono}</div>
+                  <div className="flex items-center gap-2"><Mail size={16} /> {club.gmail}</div>
+                  <div className="flex items-center gap-2 text-yellow-500 font-medium"><Star size={16} fill="currentColor"/> {club.valoracion}/5</div>
+                </div>
+
+                <p className="text-gray-700 dark:text-gray-300 mb-4 font-medium">
+                  {club.canchas ? club.canchas.length : 0} canchas disponibles
+                </p>
+
+                <Link
+                  to={`/clubes-usuario/${club.id}/canchas`}
+                  className="w-full text-center bg-blue-600 text-white py-2 rounded-lg shadow hover:bg-blue-700 transition mt-auto"
+                >
+                  Ver Canchas
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+
         <Link
-          to="/home-admin"
-          className="mt-10 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl 
-                      bg-white dark:bg-gray-800 
-                      border border-gray-200 dark:border-gray-700
-                      text-gray-600 dark:text-gray-300 font-medium shadow-sm
-                      hover:bg-gray-50 dark:hover:bg-gray-700
-                      hover:text-blue-600 dark:hover:text-blue-400
-                      hover:border-blue-200 dark:hover:border-blue-500
-                      transition-all active:scale-95 group"
+          to="/home-user" // O home-admin si estás probando
+          className="mt-10 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-blue-600 transition"
         >
-          <ArrowLeft
-            size={18}
-            className="group-hover:-translate-x-1 transition-transform duration-200"
-          />
-          Volver al Panel de Control
+          <ArrowLeft size={18} /> Volver al Inicio
         </Link>
-
       </div>
-
       <Footer />
     </div>
   );
