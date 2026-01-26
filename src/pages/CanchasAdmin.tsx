@@ -77,7 +77,7 @@ export function CanchasAdmin() {
     <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="flex-1 p-10 relative">
-        <button onClick={abrirModal} className="absolute top-10 right-10 bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-500 flex gap-2">
+        <button onClick={abrirModal} className=" absolute top-10 right-10 px-4 py-2 rounded-xl shadow flex gap-2 transition-colors bg-blue-700 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 ">
             <Plus size={18} /> Nueva Cancha
         </button>
 
@@ -91,7 +91,7 @@ export function CanchasAdmin() {
                 <div key={cancha.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border dark:border-gray-700">
                     <div className="flex justify-between items-start mb-2">
                         <h3 className="text-xl font-bold dark:text-white">{cancha.nombreCancha}</h3>
-                        <span className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">{cancha.deporte}</span>
+                        <span className=" text-xs px-2 py-1 rounded font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">{cancha.deporte}</span>
                     </div>
                     <p className="text-sm text-gray-500 mb-4">{cancha.tamanio}</p>
                     
@@ -104,12 +104,16 @@ export function CanchasAdmin() {
                     </div>
 
                     <div className="flex gap-2">
-                        <button onClick={() => navigate(`/horarios-admin/${cancha.turno.id}`)} className="flex-1 bg-green-50 text-green-700 py-2 rounded-lg flex justify-center items-center gap-2 hover:bg-green-100">
-                            <Clock size={16}/> Horarios
+                       <button
+  onClick={() => navigate(`/horarios-admin/${cancha.turno.id}`)}
+  className="flex-1 py-2 rounded-lg flex justify-center items-center gap-2 transition-colors bg-green-50 text-green-700 hover:bg-green-100 dark:bg-green-900/40 dark:text-green-300 dark:hover:bg-green-900/60"> Horarios
                         </button>
-                        <button onClick={() => eliminarCancha(cancha.id)} className="bg-red-50 text-red-600 p-2 rounded-lg hover:bg-red-100">
-                            <Trash2 size={16}/>
-                        </button>
+<button
+  onClick={() => eliminarCancha(cancha.id)}
+  className="p-2 rounded-lg transition-colors bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/40 dark:text-red-300 dark:hover:bg-red-900/60"
+>
+  <Trash2 size={16} />
+</button>
                     </div>
                 </div>
             ))}
@@ -139,7 +143,7 @@ export function CanchasAdmin() {
                     </div>
                 </div>
                 <div className="flex justify-end gap-2 mt-4">
-                    <button onClick={() => setModal({open:false, modo:'add', data:null})} className="px-4 py-2 bg-gray-200 rounded">Cancelar</button>
+                    <button onClick={() => setModal({open:false, modo:'add', data:null})} className=" px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-slate-600 dark:text-gray-100 dark:hover:bg-slate-500">Cancelar</button>
                     <button onClick={guardarCancha} className="px-4 py-2 bg-blue-600 text-white rounded">Guardar</button>
                 </div>
             </div>

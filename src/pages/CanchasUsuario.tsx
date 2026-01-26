@@ -52,10 +52,10 @@ export default function CanchasUsuario() {
                             <div className="mb-4">
                                 <h2 className="text-xl font-bold text-gray-800 dark:text-white">{cancha.nombreCancha}</h2>
                                 <div className="flex gap-2 mt-2">
-                                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center gap-1">
+                                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center gap-1 dark:bg-blue-900/40 dark:text-blue-300">
                                         <Trophy size={12}/> {cancha.deporte}
                                     </span>
-                                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded flex items-center gap-1">
+                                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded flex items-center gap-1 dark:bg-blue-900/40 dark:text-blue-300">
                                         <Ruler size={12}/> {cancha.tamanio}
                                     </span>
                                 </div>

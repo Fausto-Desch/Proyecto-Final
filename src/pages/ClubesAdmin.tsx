@@ -143,7 +143,7 @@ export function Clubes() {
                 <input className="w-full p-2 border rounded" placeholder="Email" value={modal.data.gmail} onChange={e => setModal({...modal, data: {...modal.data!, gmail: e.target.value}})} />
             </div>
             <div className="flex justify-end gap-2 mt-4">
-                <button onClick={() => setModal({open:false, modo:'add', data:null})} className="px-4 py-2 bg-gray-200 rounded">Cancelar</button>
+                <button onClick={() => setModal({open:false, modo:'add', data:null})} className=" px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-slate-600 dark:text-gray-100 dark:hover:bg-slate-500">Cancelar</button>
                 <button onClick={guardarClub} className="px-4 py-2 bg-blue-600 text-white rounded">Guardar</button>
             </div>
           </div>
