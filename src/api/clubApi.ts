@@ -61,6 +61,22 @@ export const clubApi = {
       body: JSON.stringify(cancha),
     }),
 
+    addCanchaConTurno: (
+      idClub: string, 
+      idCancha: string, 
+      datos: { 
+        nombreCancha: string, 
+        deporte: string, 
+        tamanio: string, 
+        descripcionTurno: string, 
+        costo: number 
+      }
+    ): Promise<Club> => 
+      apiClient(`/club/${idClub}/${idCancha}/completo`, {
+        method: 'POST',
+        body: JSON.stringify(datos),
+      }),
+
   deleteCancha: (idClub: string, idCancha: string): Promise<Club> => 
     apiClient(`/club/${idClub}/${idCancha}`, {
       method: 'DELETE',

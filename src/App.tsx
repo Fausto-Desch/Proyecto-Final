@@ -126,6 +126,8 @@ function AppContent() {
               }
             />
 
+           
+
             {/* REDIRECCIoN SEGUN ROL */}
             <Route
               path="/home"

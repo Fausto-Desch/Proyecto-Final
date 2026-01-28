@@ -10,14 +10,12 @@ export default function ProtectedRoute({ children, allowedRole }: ProtectedRoute
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role') as 'admin' | 'user' | null;
 
-  // Si no hay token, redirigir al login
   if (!token) {
     return <Navigate to="/login" replace />;
   }
 
-  // Si el rol no coincide, redirigir al home
   if (role !== allowedRole) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to={role === 'admin' ? '/home-admin' : '/home-user'} replace />;
   }
 
   return <>{children}</>;

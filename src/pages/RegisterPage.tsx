@@ -125,6 +125,11 @@ export default function RegisterPage() {
             </button>
           </p>
         </div>
+              <button
+   onClick={() => navigate('/')}
+    className="text-xs text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+  ← Volver a presentación
+</button>
       </div>
     </div>
   );
