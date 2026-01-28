@@ -1,139 +1,95 @@
-# ⚽ **Plataforma de Gestión y Reserva de Canchas --- Frontend**
+# ⚽ **Plataforma de Gestión y Reserva de Canchas — Frontend (Develop)**
 
-### 📌 *Proyecto Final --- Tecnicatura Universitaria en Programación (TUP)*
+### 📌 *Proyecto Final — Tecnicatura Universitaria en Programación (TUP)*
 
-Este repositorio contiene el **Frontend** de la plataforma web para la
-gestión y reserva de canchas deportivas en Bahía Blanca y alrededores.
-El proyecto moderniza y digitaliza procesos que tradicionalmente se
-realizaban por **WhatsApp o Excel**, centralizando operaciones y
-mejorando la experiencia tanto de jugadores como de administradores de
-clubes.
+Este repositorio contiene el **Frontend** de la plataforma web para la gestión y reserva de canchas deportivas. El proyecto moderniza y digitaliza procesos que tradicionalmente se realizaban de forma manual, centralizando operaciones y mejorando la experiencia tanto de jugadores como de administradores.
 
 ------------------------------------------------------------------------
 
 # 📖 **Descripción General**
 
-La aplicación permite que jugadores vean disponibilidad, reserven turnos
-y gestionen sus horarios, mientras que los administradores de clubes
-pueden controlar canchas, precios, agenda diaria y reservas.
+La aplicación permite que los jugadores visualicen disponibilidad y reserven turnos, mientras que los administradores controlan clubes, canchas, precios y la agenda diaria.
 
-✔ Reservas online en tiempo real\
-✔ Gestión completa de clubes y canchas\
-✔ Organización automática del cronograma\
-✔ Interfaz moderna y adaptable
+✔ Reservas online en tiempo real  
+✔ Gestión completa de infraestructura deportiva  
+✔ Organización automática del cronograma  
+✔ Interfaz moderna, adaptable y con soporte para Dark Mode  
 
 ------------------------------------------------------------------------
 
-# 🔐 **Usuarios de Prueba**
+# 🚀 **Flujo de Navegación**
 
-### 👤 **Jugador / Usuario**
+### 🌟 **Página de Presentación (Landing Page)**
+Antes del ingreso, los usuarios son recibidos por una sección de presentación que destaca las ventajas de la plataforma.
+
+![Presentación](./screenshots/Presentacion.png)
+
+------------------------------------------------------------------------
+
+# 🔐 **Acceso al Sistema**
+
+### 👤 **Login de Usuarios**
+Sistema de autenticación seguro para los diferentes roles.
 
 ![Login](./screenshots/Login.png)
 
--   **Email:** `user@test.com`
--   **Contraseña:** `user123`
-
-### 🛠️ **Administrador**
-
--   **Email:** `admin@test.com`
--   **Contraseña:** `admin123`
+-   **Jugador:** `user@test.com` / `user123`
+-   **Admin:** `admin@test.com` / `admin123`
 
 ------------------------------------------------------------------------
 
 # 🧑‍🤝‍🧑 **Roles y Funcionalidades**
 
-## ⚽ **Rol Jugador --- User**
+## ⚽ **Módulo Jugador — User**
 
-Acceso desde: `/login` → `/home-user`
+El usuario puede buscar clubes, ver canchas disponibles y gestionar sus reservas de forma intuitiva.
 
-El usuario puede: - 🔍 Buscar canchas\
-- 📅 Ver disponibilidad\
-- 🕒 Reservar horarios\
-- 🚪 Cerrar sesión
+- 🔍 **Búsqueda:** Exploración de clubes en la zona.
+- 📅 **Disponibilidad:** Consulta de horarios libres.
+- 🕒 **Reserva:** Proceso ágil de reserva.
+
 ![Home User](./screenshots/HomeUser.png)
-![Listado Horarios User](./screenshots/ListadoHorariosUser.png)
-![Listado Cancha User](./screenshots/ListadoCanchaUser.png)
-![Club User](./screenshots/ClubUser.png)
-
-
-
+![Listado Canchas](./screenshots/CanchasUsuario.png)
+![Vista Club](./screenshots/ClubesUsuario.png)
 
 ------------------------------------------------------------------------
 
-## 🏟️ **Rol Administrador --- Admin**
+## 🏟️ **Módulo Administrador — Admin**
 
-Acceso desde: `/home-admin`
+Herramientas potentes para la gestión total del club.
 
-El Administrador puede: - Gestionar Clubes\
-- Administrar Canchas\
-- Manejar Agenda diaria\
-- Confirmar o eliminar reservas\
-- Crear turnos manualmente\
-- Gestionar horarios en detalle
+- 🏗️ **Infraestructura:** Gestión de canchas y clubes.
+- 🗓️ **Agenda:** Control detallado de horarios y turnos.
+- ⚙️ **Operaciones:** Edición de datos en tiempo real.
 
 ![Home Admin](./screenshots/HomeAdmin.png)
-![Listado de Clubes](./screenshots/ListadoClubAdmin.png)
-![Gestión de Club](./screenshots/GestionClubAdmin.png)
-![Editar Cancha](./screenshots/EditarCanchaAdmin.png)
-![Nueva Cancha](./screenshots/NuevaCanchaAdmin.png)
-![Listado de Horarios](./screenshots/ListadoHorarioAdmin.png)
-
-
-
-
+![Gestión de Clubes](./screenshots/ClubesAdmin.png)
+![Administración de Canchas](./screenshots/canchasAdmin.png)
+![Control de Horarios](./screenshots/HorariosAdmin.png)
 
 ------------------------------------------------------------------------
 
 # 🖥️ **Tecnologías Utilizadas**
 
--   React 18\
--   TypeScript\
--   Vite\
--   TailwindCSS\
--   Lucide React\
--   React Router DOM\
--   Context API
+-   **Framework:** React 18 + Vite
+-   **Lenguaje:** TypeScript
+-   **Estilos:** TailwindCSS + Framer Motion (Animaciones)
+-   **Iconografía:** Lucide React
+-   **Estado/Rutas:** Context API + React Router DOM
 
 ------------------------------------------------------------------------
 
-# 📂 **Estructura**
+# 🛠️ **Instalación y Uso (Local)**
 
-    src/
-     ├── components/
-     ├── pages/
-     ├── context/
-     ├── routes/
-     ├── services/
-     ├── types/
-     └── App.tsx
+```bash
+# 1. Clonar el repositorio
+git clone [https://github.com/Fausto-Desch/Proyecto-Final.git](https://github.com/Fausto-Desch/Proyecto-Final.git)
 
-------------------------------------------------------------------------
+# 2. Entrar a la carpeta
+cd Proyecto-Final
 
-# 🛠️ Instalación
-
-``` bash
-git clone <URL_DEL_REPOSITORIO>
+# 3. Instalar dependencias
 npm install
+
+# 4. Iniciar entorno de desarrollo
 npm run dev
-```
-
-------------------------------------------------------------------------
-
-# 📸 **Espacios para Capturas**
-
--   Login\
--   Home Usuario\
--   Home Admin\
--   Gestión de Canchas\
--   Gestión de Horarios\
--   Reserva desde el usuario\
--   Responsive
-
-------------------------------------------------------------------------
-
-# 📌 Notas Finales
-
--   Integración completa con backend Node/Express\
--   Proyecto presentado como Trabajo Final de la TUP\
--   Diseño responsivo, pensado para uso real
-
