@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  allowedRole: 'admin' | 'user';
+  allowedRole: 'admin' | 'user' | 'owner';
 }
 
 export default function ProtectedRoute({ children, allowedRole }: ProtectedRouteProps) {

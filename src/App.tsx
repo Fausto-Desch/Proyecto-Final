@@ -42,7 +42,7 @@ function AppContent() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-            {/* ================= SUPER ADMIN ================= */}
+            {/* ================= ADMIN ================= */}
             <Route
               path="/home-admin"
               element={
@@ -81,9 +81,9 @@ function AppContent() {
 
             {/* ================= DUEÑO CLUB ================= */}
             <Route
-              path="/panel-club"
+              path="/home-owner"
               element={
-                <ProtectedRoute allowedRole="admin">
+                <ProtectedRoute allowedRole="owner">
                   <HomeOwner />
                 </ProtectedRoute>
               }
@@ -126,8 +126,6 @@ function AppContent() {
               }
             />
 
-           
-
             {/* REDIRECCIoN SEGUN ROL */}
             <Route
               path="/home"
@@ -153,6 +151,7 @@ function HomeRedirect() {
 
   if (role === 'admin') return <Navigate to="/home-admin" replace />;
   if (role === 'user') return <Navigate to="/home-user" replace />;
+  if (role === 'owner') return <Navigate to="/home-owner" replace />;
   return <Navigate to="/login" replace />;
 }
 

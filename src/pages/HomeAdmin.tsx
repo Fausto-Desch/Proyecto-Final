@@ -9,7 +9,6 @@ import {
     CheckCircle2, 
     ArrowRight,
     LayoutDashboard,
-    Clock,
     Activity,
     ShieldCheck
 } from 'lucide-react';

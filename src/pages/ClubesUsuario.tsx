@@ -5,7 +5,7 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { 
     MapPin, ArrowLeft, Phone, Star, Search, 
-    ArrowRight, Navigation, Heart, Building2,
+    ArrowRight, Navigation, Heart, 
     LayoutDashboard, Calendar, Users
 } from "lucide-react";
 import { clubApi, type Club } from "../api/clubApi";
@@ -61,9 +61,9 @@ export default function ClubesUsuario() {
           <SidebarStat icon={<Calendar size={18} className="text-orange-500"/>} label="Reservas Ocupadas" value="0" />
 
           <div className="mt-auto p-4 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-500/20 rounded-xl">
-             <p className="text-[10px] text-blue-600 dark:text-blue-300 leading-relaxed font-medium italic">
-                Estas estadísticas se actualizan automáticamente con la base de datos.
-             </p>
+              <p className="text-[10px] text-blue-600 dark:text-blue-300 leading-relaxed font-medium italic">
+                  Estas estadísticas se actualizan automáticamente con la base de datos.
+              </p>
           </div>
         </aside>
 
@@ -149,7 +149,7 @@ export default function ClubesUsuario() {
                           <Phone size={13} className="text-slate-300 dark:text-gray-600"/> {club.telefono}
                         </div>
                         <div className="text-blue-600 dark:text-blue-500 font-black">
-                           • {club.canchas?.length || 0} CANCHAS
+                            • {club.canchas?.length || 0} CANCHAS
                         </div>
                       </div>
 

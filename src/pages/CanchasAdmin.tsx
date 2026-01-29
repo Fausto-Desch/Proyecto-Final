@@ -1,19 +1,19 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Sidebar } from "../components/layout/Sidebar";
 import { Footer } from "../components/layout/Footer";
 import { 
     Trash2, Plus, ArrowLeft, Loader2, Save, X, 
-    Trophy, Banknote, CalendarClock, Users, 
-    Activity, Info, ChevronRight, CircleDot
+    Trophy, Banknote, Users, 
+    Activity, ChevronRight, CircleDot
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { clubApi, type Club, type Cancha } from "../api/clubApi";
 
 interface ModalState {
-  open: boolean;
-  modo: "add";
-  data: Cancha;
+    open: boolean;
+    modo: "add";
+    data: Cancha;
 }
 
 const initialCanchaState: Cancha = {
@@ -25,62 +25,62 @@ const initialCanchaState: Cancha = {
 };
 
 export function CanchasAdmin() {
-  const { clubId } = useParams<{ clubId: string }>();
-  const navigate = useNavigate();
-  const [club, setClub] = useState<Club | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [modal, setModal] = useState<ModalState>({ open: false, modo: "add", data: initialCanchaState });
+const { clubId } = useParams<{ clubId: string }>();
+const navigate = useNavigate();
+const [club, setClub] = useState<Club | null>(null);
+const [loading, setLoading] = useState(true);
+const [isSubmitting, setIsSubmitting] = useState(false);
+const [modal, setModal] = useState<ModalState>({ open: false, modo: "add", data: initialCanchaState });
 
-  const cargarDatos = async () => {
+const cargarDatos = async () => {
     if (!clubId) return;
-    try {
-      const data = await clubApi.getById(clubId);
-      setClub(data);
-    } catch (error) { console.error(error); } finally { setLoading(false); }
-  };
+        try {
+            const data = await clubApi.getById(clubId);
+            setClub(data);
+        } catch (error) { console.error(error); } finally { setLoading(false); }
+    };
 
-  useEffect(() => { cargarDatos(); }, [clubId]);
+useEffect(() => { cargarDatos(); }, [clubId]);
 
-  const guardarCancha = async (e: React.FormEvent) => {
+const guardarCancha = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!clubId) return;
-    setIsSubmitting(true);
+        setIsSubmitting(true);
     try {
         const payload = {
-          nombreCancha: modal.data.nombreCancha,
-          deporte: modal.data.deporte,
-          tamanio: modal.data.tamanio,
-          descripcionTurno: modal.data.turno.descripcionTurno,
-          costo: modal.data.turno.costo,
+        nombreCancha: modal.data.nombreCancha,
+        deporte: modal.data.deporte,
+        tamanio: modal.data.tamanio,
+        descripcionTurno: modal.data.turno.descripcionTurno,
+        costo: modal.data.turno.costo,
         };
         await clubApi.addCanchaConTurno(clubId, modal.data.id, payload);
         await cargarDatos();
         setModal({ open: false, modo: "add", data: initialCanchaState });
     } catch (error) { alert("Error: " + error); } finally { setIsSubmitting(false); }
-  };
+};
 
-  const eliminarCancha = async (id: string) => {
+const eliminarCancha = async (id: string) => {
     if (!window.confirm("¿Eliminar esta cancha y todos sus horarios?")) return;
     try {
-      await clubApi.deleteCancha(clubId!, id);
-      await cargarDatos();
+        await clubApi.deleteCancha(clubId!, id);
+        await cargarDatos();
     } catch (error) { alert("Error: " + error); }
-  };
+};
 
-  // Helper para renderizar íconos según deporte
-  const getSportIcon = (deporte: string) => {
+// Helper para renderizar íconos según deporte
+const getSportIcon = (deporte: string) => {
     switch(deporte.toLowerCase()){
         case 'tenis': return <CircleDot className="text-yellow-500" />;
         case 'padel': return <Activity className="text-emerald-500" />;
         default: return <Trophy className="text-blue-500" />;
     }
-  };
+};
 
-  return (
+return (
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-gray-950 transition-colors duration-300">
-      <Navbar />
-      <div className="flex flex-1">
+        <Navbar />
+        <div className="flex flex-1">
         <Sidebar />
         <main className="flex-1 p-6 lg:p-10 flex flex-col gap-8">
             
@@ -186,12 +186,12 @@ export function CanchasAdmin() {
                     </div>
                 )}
             </div>
-          <Footer />
+            <Footer />
         </main>
-      </div>
+    </div>
 
-      {/* 4. MODAL REDISEÑADO */}
-      {modal.open && (
+    {/* 4. MODAL REDISEÑADO */}
+    {modal.open && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex justify-center items-center p-4 z-50 animate-in fade-in duration-300">
             <div className="bg-white dark:bg-gray-900 rounded-[3rem] shadow-2xl w-full max-w-xl overflow-hidden border border-white/20">
                 <div className="p-8 border-b border-slate-100 dark:border-gray-800 flex justify-between items-center bg-slate-50/50 dark:bg-gray-800/50">
@@ -249,7 +249,7 @@ export function CanchasAdmin() {
                 </form>
             </div>
         </div>
-      )}
+    )}
     </div>
-  );
+);
 }
