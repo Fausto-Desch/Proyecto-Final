@@ -21,6 +21,8 @@ import { CanchasAdmin } from './pages/CanchasAdmin';
 import CanchasUsuario from './pages/CanchasUsuario';
 import HorariosUsuario from './pages/HorariosUsuario';
 import HorariosAdmin from './pages/HorariosAdmin';
+import { CanchasOwner } from './pages/CanchasOwner';
+import HorariosOwner from './pages/HorariosOwner';
 
 function AppContent() {
   const { theme } = useTheme();
@@ -79,12 +81,30 @@ function AppContent() {
               }
             />
 
-            {/*dueño cancha/owner */}
+           {/* owner */}
+          <Route
+            path="/home-owner" 
+            element={
+            <ProtectedRoute allowedRole="owner">
+              <HomeOwner />
+            </ProtectedRoute>
+              }
+          />
+
             <Route
-              path="/home-owner"
+              path="/clubes-owner/:clubId/canchas" //
               element={
                 <ProtectedRoute allowedRole="owner">
-                  <HomeOwner />
+                  <CanchasOwner />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/horarios-owner/:turnoId"
+              element={
+                <ProtectedRoute allowedRole="owner">
+                  <HorariosOwner />
                 </ProtectedRoute>
               }
             />
@@ -152,6 +172,7 @@ function HomeRedirect() {
   if (role === 'admin') return <Navigate to="/home-admin" replace />;
   if (role === 'user') return <Navigate to="/home-user" replace />;
   if (role === 'owner') return <Navigate to="/home-owner" replace />;
+  
   return <Navigate to="/login" replace />;
 }
 

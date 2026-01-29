@@ -13,8 +13,7 @@ export default function LoginPage() {
   useEffect(() => {
     const token = authApi.getToken();
     if (token) {
-      const role = authApi.getRole();
-      navigate(role === 'admin' ? '/home-admin' : '/home-user', { replace: true });
+      navigate('/home', { replace: true });
     }
   }, [navigate]);
 
@@ -25,8 +24,8 @@ export default function LoginPage() {
     try {
       const data = await authApi.login({ email, password });
       authApi.saveUserData(data);
-      const role = authApi.getRole();
-      navigate(role === 'admin' ? '/home-admin' : '/home-user');
+      
+      navigate('/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Credenciales inválidas');
     } finally {
