@@ -6,6 +6,7 @@ export interface Horario {
   disponibilidad: boolean;
   horario: string;
   diaHorario: string;
+  idTurno: string;
 }
 
 export interface Turno {
