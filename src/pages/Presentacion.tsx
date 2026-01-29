@@ -21,7 +21,7 @@ export default function Presentacion() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#05080f] text-gray-900 dark:text-white overflow-hidden transition-colors duration-500">
       
-      {/* Botón de cambio de tema */}
+      {/* Boton de cambio de tema */}
       <button
         onClick={toggleTheme}
         className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-lg hover:scale-110 active:scale-95 transition-all duration-300"
@@ -37,7 +37,6 @@ export default function Presentacion() {
         </motion.div>
       </button>
 
-      {/* HERO SECTION */}
       <section className="relative px-6 py-36 text-center overflow-hidden bg-gradient-to-br from-indigo-700 via-purple-700 to-fuchsia-700 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_70%)]" />
 
@@ -76,7 +75,6 @@ export default function Presentacion() {
         </motion.div>
       </section>
 
-      {/* FEATURES SECTION */}
       <section className="px-6 py-28 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8">
           <GlassCard
@@ -94,7 +92,7 @@ export default function Presentacion() {
         </div>
       </section>
 
-      {/* ESTADÍSTICAS */}
+      {/* Estadisticas */}
       <section className="px-6 py-24 bg-gray-50 dark:bg-white/5 transition-colors duration-500">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 text-center">
           <Stat value="Centralizado" label="Todo tu club en un panel" />
@@ -103,7 +101,7 @@ export default function Presentacion() {
         </div>
       </section>
 
-      {/* SECCIÓN FINAL CALL TO ACTION */}
+      {/* Seccion final*/}
       <section className="px-6 py-32 text-center bg-gradient-to-r from-indigo-600 to-fuchsia-600 text-white">
         <h2 className="text-4xl font-black mb-6 uppercase italic">Empieza hoy mismo</h2>
         <p className="mb-10 opacity-90 text-lg max-w-xl mx-auto">
@@ -121,7 +119,7 @@ export default function Presentacion() {
   );
 }
 
-/* --- COMPONENTES AUXILIARES CON TIPADO --- */
+{/*Componentes auxiliares*/}
 
 function PrimaryButton({ children, onClick }: ButtonProps) {
   return (

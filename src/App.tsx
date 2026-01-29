@@ -13,7 +13,7 @@ import AuthenticatedRoute from './components/AuthenticatedRoute';
 
 import Presentacion from './pages/Presentacion';
 
-// UI / Theme
+// Theme
 import { SplashScreen } from './components/layout/SplashScreen';
 import { ThemeProvider, useTheme } from "./context/ThemaContext"; 
 
@@ -34,15 +34,15 @@ function AppContent() {
         <BrowserRouter>
           <Routes>
 
-            {/* PRESENTACIÓN */}
+            {/* presentacion */}
             <Route path="/" element={<Navigate to="/presentacion" replace />} />
             <Route path="/presentacion" element={<Presentacion />} />
 
-            {/* AUTH */}
+            {/* auth */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-            {/* ================= ADMIN ================= */}
+            {/* admin */}
             <Route
               path="/home-admin"
               element={
@@ -79,7 +79,7 @@ function AppContent() {
               }
             />
 
-            {/* ================= DUEÑO CLUB ================= */}
+            {/*dueño cancha/owner */}
             <Route
               path="/home-owner"
               element={
@@ -89,7 +89,7 @@ function AppContent() {
               }
             />
 
-            {/* ================= USUARIO ================= */}
+            {/* usuario */}
             <Route
               path="/home-user"
               element={
@@ -126,7 +126,7 @@ function AppContent() {
               }
             />
 
-            {/* REDIRECCIoN SEGUN ROL */}
+            {/* redireccion rol*/}
             <Route
               path="/home"
               element={
@@ -136,7 +136,7 @@ function AppContent() {
               }
             />
 
-            {/* FALLBACK */}
+            {/* fallback */}
             <Route path="*" element={<Navigate to="/presentacion" replace />} />
 
           </Routes>

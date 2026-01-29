@@ -19,7 +19,7 @@ export default function HomeUser() {
   const whatsappNumber = "5491133344455"; 
   const whatsappMessage = `Hola! Soy ${userName || "un jugador"}, quiero hacer una consulta sobre las canchas.`;
 
-  // Lógica de Scroll mejorada con useRef
+  // Logica de scroll 
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
@@ -76,10 +76,10 @@ export default function HomeUser() {
                 </div>
               </motion.div>
 
-              {/* GRILLA DE ACCIONES */}
+              {/* grilla de acciones */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
-                {/* BUSCAR CANCHAS (Sección Principal) */}
+                {/* Buscar canchas (Sección Principal) */}
                 <motion.div
                   whileHover={{ y: -8 }}
                   onClick={() => navigate("/clubes-usuario")}
@@ -104,7 +104,7 @@ export default function HomeUser() {
                   </div>
                 </motion.div>
 
-                {/* NUEVA SECCIÓN: RENDIMIENTO / ESTADÍSTICAS */}
+                {/*  rendimiento / estadisticas */}
                 <div className="flex flex-col gap-8">
                   <motion.div 
                     whileHover={{ scale: 1.02 }}
@@ -143,7 +143,7 @@ export default function HomeUser() {
 
               </div>
 
-              {/* TIP */}
+              {/* tip */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -164,7 +164,7 @@ export default function HomeUser() {
         </main>
       </div>
 
-      {/* BOTÓN DE WHATSAPP */}
+      {/* boton de whatsap */}
       <AnimatePresence>
         {isVisible && (
           <motion.div

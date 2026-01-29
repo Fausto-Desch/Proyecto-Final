@@ -20,7 +20,7 @@ interface MiClubData {
 export function HomeOwner() {
     const navigate = useNavigate();
 
-    // Estado inicial simulado
+    
     const [miClub, setMiClub] = useState<MiClubData>({
         id: 1,
         nombre: "Club Atlético Demo",
@@ -32,7 +32,7 @@ export function HomeOwner() {
 
     const guardarCambios = () => {
         setEditando(false);
-        // Aquí iría tu: await clubApi.update(miClub.id, miClub);
+       
         console.log("Datos actualizados", miClub);
     };
 
@@ -50,7 +50,7 @@ export function HomeOwner() {
                         className="max-w-6xl mx-auto"
                     >
                         
-                        {/* HEADER DE BIENVENIDA */}
+                        {/* header */}
                         <div className="mb-10">
                             <h1 className="text-4xl font-black italic uppercase tracking-tighter text-slate-800 dark:text-white">
                                 Panel de <span className="text-indigo-600">Gestión</span>
@@ -62,7 +62,7 @@ export function HomeOwner() {
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             
-                            {/* COLUMNA IZQUIERDA: PERFIL DEL CLUB */}
+                            {/* Perfil club ( columna izquierda) */}
                             <div className="lg:col-span-1 space-y-6">
                                 <div className="bg-white dark:bg-[#0d121f] rounded-[2rem] shadow-xl shadow-slate-200/50 dark:shadow-none p-8 border border-slate-200 dark:border-gray-800/60 relative overflow-hidden">
                                     <div className="flex justify-between items-center mb-8 relative z-10">
@@ -135,10 +135,10 @@ export function HomeOwner() {
                                 </div>
                             </div>
 
-                            {/* COLUMNA DERECHA: ACCIONES Y ESTADOS */}
+                            {/* columna derecha ( acciones y estado) */}
                             <div className="lg:col-span-2 space-y-8">
                                 
-                                {/* BANNER DE CANCHAS */}
+                                {/* banner de canchas */}
                                 <motion.div 
                                     whileHover={{ scale: 1.01 }}
                                     onClick={() => navigate(`/clubes/${miClub.id}/canchas`)}
@@ -159,7 +159,7 @@ export function HomeOwner() {
                                     <LayoutGrid className="absolute -right-12 -bottom-12 text-white opacity-10 w-64 h-64 group-hover:scale-110 transition-transform duration-700"/>
                                 </motion.div>
 
-                                {/* LISTA DE TURNOS RECIENTES */}
+                                {/* lista de turnos */}
                                 <div className="bg-white dark:bg-[#0d121f] rounded-[2.5rem] p-8 border border-slate-200 dark:border-gray-800/60 shadow-sm">
                                     <h3 className="text-lg font-black uppercase tracking-tighter text-slate-800 dark:text-white mb-6 flex items-center gap-2 italic">
                                         <CalendarDays className="text-orange-500" size={20}/> Actividad Reciente
@@ -180,7 +180,7 @@ export function HomeOwner() {
     );
 }
 
-// Sub-componente interno para limpieza del código
+
 function TurnoItem({ cancha, hora, estado }: { cancha: string, hora: string, estado: 'confirmado' | 'pendiente' }) {
     return (
         <div className="flex items-center justify-between p-5 bg-slate-50 dark:bg-white/5 rounded-[1.5rem] border border-slate-100 dark:border-gray-800 group hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all">

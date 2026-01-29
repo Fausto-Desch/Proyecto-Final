@@ -68,7 +68,7 @@ const eliminarCancha = async (id: string) => {
     } catch (error) { alert("Error: " + error); }
 };
 
-// Helper para renderizar íconos según deporte
+
 const getSportIcon = (deporte: string) => {
     switch(deporte.toLowerCase()){
         case 'tenis': return <CircleDot className="text-yellow-500" />;
@@ -84,7 +84,7 @@ return (
         <Sidebar />
         <main className="flex-1 p-6 lg:p-10 flex flex-col gap-8">
             
-            {/* 1. HEADER DINÁMICO */}
+            {/* header */}
             <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-2">
                     <button 
@@ -106,7 +106,7 @@ return (
                 </button>
             </header>
 
-            {/* 2. STATS BAR (EL "TOQUE MEJORADO") */}
+            {/*  stats bar */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-white dark:bg-gray-900 p-5 rounded-3xl border border-slate-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
                     <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-2xl text-blue-600"><Trophy size={24}/></div>
@@ -131,7 +131,7 @@ return (
                 </div>
             </div>
 
-            {/* 3. GRID DE CANCHAS */}
+            {/* grid canchas*/}
             <div className="flex-1">
                 {loading ? (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-pulse">
@@ -190,7 +190,6 @@ return (
         </main>
     </div>
 
-    {/* 4. MODAL REDISEÑADO */}
     {modal.open && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex justify-center items-center p-4 z-50 animate-in fade-in duration-300">
             <div className="bg-white dark:bg-gray-900 rounded-[3rem] shadow-2xl w-full max-w-xl overflow-hidden border border-white/20">
@@ -218,9 +217,11 @@ return (
                             <div>
                                 <label className="text-xs font-black text-slate-400 uppercase ml-2 mb-1 block">Deporte</label>
                                 <select className="w-full p-4 bg-slate-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none dark:text-white font-bold" value={modal.data.deporte} onChange={e => setModal({...modal, data: {...modal.data, deporte: e.target.value}})}>
-                                    <option value="Fútbol">⚽ Fútbol</option>
-                                    <option value="Tenis">🎾 Tenis</option>
-                                    <option value="Padel">🎾 Padel</option>
+                                    <option value="Fútbol"> Fútbol</option>
+                                    <option value="Tenis"> Tenis</option>
+                                    <option value="Padel"> Padel</option>
+                                    <option value="Voley"> Voley</option>
+                                    <option value="Basquet"> Basquet</option>
                                 </select>
                             </div>
                             <div>

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Arreglo global para inputs usando CSS estándar */
+
 @layer base {
   input, select, textarea {
     /* Estilos base (Modo Claro) */

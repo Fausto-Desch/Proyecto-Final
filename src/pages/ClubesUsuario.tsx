@@ -51,7 +51,7 @@ export default function ClubesUsuario() {
       <Navbar />
 
       <div className="flex flex-1 overflow-hidden">
-        {/* SIDEBAR ADAPTABLE */}
+        {/* siderbar adaptable */}
         <aside className="w-64 border-r border-slate-200 dark:border-gray-800/40 p-6 hidden lg:flex flex-col gap-4 bg-white dark:bg-[#05080f]">
           <h2 className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-2">Estadísticas Reales</h2>
           
@@ -67,7 +67,7 @@ export default function ClubesUsuario() {
           </div>
         </aside>
 
-        {/* PANEL CENTRAL */}
+        {/* panel central */}
         <main className="flex-1 overflow-y-auto p-8 lg:p-12">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -83,7 +83,7 @@ export default function ClubesUsuario() {
               </p>
             </div>
 
-            {/* Buscador adaptable */}
+            {/* Buscador  */}
             <div className="relative w-full md:w-80 group">
               <div className="absolute -inset-0.5 bg-blue-500/20 rounded-xl blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
               <div className="relative flex items-center bg-white dark:bg-[#111622] border border-slate-200 dark:border-gray-800 rounded-xl px-4 py-3 shadow-sm dark:shadow-inner">
@@ -99,7 +99,7 @@ export default function ClubesUsuario() {
             </div>
           </motion.div>
 
-          {/* Grilla de Clubes */}
+          {/* Grilla de clubes */}
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
               {[1, 2, 3].map(i => (
@@ -123,7 +123,7 @@ export default function ClubesUsuario() {
                     whileHover={{ y: -5 }}
                     className="bg-white dark:bg-[#0d121f] rounded-[2.5rem] border border-slate-200 dark:border-gray-800/60 flex flex-col overflow-hidden group hover:border-blue-400 dark:hover:border-blue-500/40 transition-all duration-300 shadow-md hover:shadow-xl dark:shadow-2xl"
                   >
-                    {/* Visual superior */}
+
                     <div className="relative h-44 bg-slate-100 dark:bg-[#161b2a] overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-t from-white/80 dark:from-[#0d121f] via-transparent to-transparent opacity-90" />
                       <button className="absolute top-5 right-5 p-2.5 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-xl border border-slate-200 dark:border-white/5 group/heart shadow-sm">
@@ -136,7 +136,7 @@ export default function ClubesUsuario() {
                       </div>
                     </div>
 
-                    {/* Info Club */}
+                    {/* info club */}
                     <div className="p-7 flex flex-col flex-1">
                       <h2 className="text-2xl font-extrabold mb-1 tracking-tight text-slate-800 dark:text-white">{club.nombreClub}</h2>
                       <div className="flex items-center gap-2 text-slate-500 dark:text-gray-500 mb-6 italic">
@@ -153,7 +153,7 @@ export default function ClubesUsuario() {
                         </div>
                       </div>
 
-                      {/* Botones Adaptables */}
+                      {/* Botones */}
                       <div className="mt-auto flex gap-2">
                         <Link
                           to={`/clubes-usuario/${club.id}/canchas`}
@@ -172,7 +172,7 @@ export default function ClubesUsuario() {
             </motion.div>
           )}
 
-          {/* Botón Volver Adaptable */}
+          {/* boton volver*/}
           <div className="mt-16 flex justify-center pb-6">
             <Link 
                 to="/home-user" 

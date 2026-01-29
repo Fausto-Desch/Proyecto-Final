@@ -95,7 +95,7 @@ return (
         <main className="flex-1 overflow-y-auto p-6 lg:p-12">
             <div className="max-w-7xl mx-auto space-y-10">
                 
-                {/* 1. TOP BAR: TITULO Y ACCIONES */}
+                {/* titulo y acciones*/}
                 <header className="flex flex-col xl:flex-row xl:items-center justify-between gap-8">
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
                     <div className="flex items-center gap-3 mb-2">
@@ -127,7 +127,7 @@ return (
                 </div>
                 </header>
 
-                {/* 2. DASHBOARD MINI-STATS  */}
+                {/* mini-stats  */}
                 <section className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                     {[
                         { label: 'Sedes Registradas', value: stats.totalSedes, icon: Building2, color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -150,7 +150,7 @@ return (
                     ))}
                 </section>
 
-                {/* 3. GRID DE CLUBES */}
+                {/* grid clubes*/}
                 <div className="min-h-[400px]">
                 {loading ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
@@ -223,7 +223,7 @@ return (
                 )}
                 </div>
 
-                {/* 4. ACCIÓN DE RETORNO */}
+ 
                 <footer className="pt-10 border-t border-slate-200 dark:border-gray-900 flex justify-center">
                 <Link to="/home-admin" className="group flex items-center gap-4 text-slate-400 hover:text-blue-600 font-bold transition-all">
                     <div className="w-12 h-12 rounded-full border border-slate-200 dark:border-gray-800 flex items-center justify-center group-hover:border-blue-600 group-hover:bg-blue-50 transition-all">
@@ -238,7 +238,7 @@ return (
 
         <Footer />
 
-        {/* MODAL REDISEÑADO CON ANIMACIÓN */}
+        {/* Modal Agregar/Editar Club */}
         <AnimatePresence>
             {modal.open && (
             <div className="fixed inset-0 flex items-center justify-center p-4 z-[100]">

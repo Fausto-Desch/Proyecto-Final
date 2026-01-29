@@ -34,7 +34,7 @@ export function HomeAdmin() {
                     <div className="p-6 lg:p-12">
                         <div className="max-w-6xl mx-auto">
                             
-                            {/* HEADER DE CONTROL */}
+                            {/*header*/}
                             <motion.header 
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -57,10 +57,9 @@ export function HomeAdmin() {
                                 </div>
                             </motion.header>
 
-                            {/* INDICADORES CLAVE (KPIs) */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                                 
-                                {/* Card Resumen Principal */}
+                                {/* Card Resumen  */}
                                 <motion.div 
                                     whileHover={{ y: -5 }}
                                     className="md:col-span-2 relative overflow-hidden bg-gradient-to-br from-blue-700 to-indigo-900 p-10 rounded-[2.5rem] shadow-2xl shadow-blue-900/20 text-white"
@@ -86,7 +85,7 @@ export function HomeAdmin() {
                                     <CalendarDays className="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 rotate-12" />
                                 </motion.div>
 
-                                {/* Card Status de Conexión */}
+                                {/* Card estado */}
                                 <motion.div 
                                     whileHover={{ y: -5 }}
                                     className="bg-white dark:bg-[#0d121f] p-8 rounded-[2.5rem] border border-slate-200 dark:border-gray-800/60 flex flex-col justify-between shadow-sm relative overflow-hidden group"
@@ -111,7 +110,6 @@ export function HomeAdmin() {
                                 </motion.div>
                             </div>
 
-                            {/* ACCIÓN PRINCIPAL DE GESTIÓN */}
                             <h2 className="text-[10px] font-black text-slate-400 dark:text-gray-600 uppercase tracking-[0.3em] mb-6 ml-4">Infraestructura y Negocio</h2>
                             
                             <motion.div 
