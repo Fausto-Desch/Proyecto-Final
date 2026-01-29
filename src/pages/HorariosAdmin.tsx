@@ -5,7 +5,7 @@ import {
     ArrowLeft, Calendar, Clock, Trash2, Zap, 
     Filter, X, Plus, CalendarDays, Info, 
     CheckCircle2, AlertCircle, Loader2, Save,
-    MessageSquare, RefreshCw
+    MessageSquare, RefreshCw, ToggleLeft, ToggleRight
 } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
 import { turnoApi } from "../api/turnoApi";
@@ -33,6 +33,34 @@ export default function HorariosAdmin() {
     };
 
     useEffect(() => { fetchTurno(); }, [turnoId]);
+
+    const toggleDisponibilidad = async (h: Horario) => {
+        if (!turnoId) return;
+        setIsProcessing(true);
+        try {
+            
+            const res = await fetch(`http://localhost:3000/horario/${h.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}` 
+                },
+                body: JSON.stringify({
+                    disponibilidad: !h.disponibilidad,
+                    horario: h.horario,
+                    diaHorario: h.diaHorario,
+                    idTurno: turnoId
+                })
+            });
+
+            if (!res.ok) throw new Error("Error al actualizar estado");
+            await fetchTurno(); 
+        } catch (error) {
+            alert("Error al cambiar estado: " + error);
+        } finally {
+            setIsProcessing(false);
+        }
+    };
 
     const horariosFiltrados = useMemo(() => {
         if (!turno?.horarios) return [];
@@ -101,7 +129,6 @@ export default function HorariosAdmin() {
             
             <main className="flex-1 p-4 lg:p-10 max-w-7xl mx-auto w-full flex flex-col gap-8">
                 
-                {/* header */}
                 <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                     <div className="space-y-2">
                         <button 
@@ -126,7 +153,6 @@ export default function HorariosAdmin() {
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* panel generacio individual */}
                     <section className="bg-white dark:bg-gray-900 p-8 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-gray-800">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl text-blue-600"><Plus size={20}/></div>
@@ -142,7 +168,6 @@ export default function HorariosAdmin() {
                         </div>
                     </section>
 
-                    {/* panel generacion*/}
                     <section className="lg:col-span-2 bg-gradient-to-br from-blue-600 to-indigo-700 p-8 rounded-[2.5rem] shadow-xl text-white">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl text-white"><Zap size={20}/></div>
@@ -168,7 +193,6 @@ export default function HorariosAdmin() {
                     </section>
                 </div>
 
-                {/* listado horario */}
                 <section className="space-y-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-200 dark:border-gray-800 pb-6">
                         <div className="flex items-center gap-3">
@@ -189,7 +213,7 @@ export default function HorariosAdmin() {
                     {horariosFiltrados.length === 0 ? (
                         <div className="text-center py-20 bg-white dark:bg-gray-900 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-gray-800">
                             <Clock className="mx-auto text-slate-200 mb-4" size={64} />
-                            <p className="text-xl font-bold text-slate-400">No hay horarios cargados</p>
+                            <p className="text-xl font-bold text-slate-400">No hay horarios cargados para esta fecha</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
@@ -202,7 +226,6 @@ export default function HorariosAdmin() {
                                         : "bg-blue-50/50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800/50 shadow-inner"
                                     }`}
                                 >
-                                    {/* Cabecera Card */}
                                     <div className="flex justify-between items-start mb-4">
                                         <span className={`p-2.5 rounded-xl transition-colors ${
                                             h.disponibilidad ? "bg-slate-50 dark:bg-gray-800 text-slate-400" : "bg-blue-600 text-white"
@@ -217,25 +240,29 @@ export default function HorariosAdmin() {
                                         </button>
                                     </div>
                                     
-                                    {/* Horario */}
                                     <p className={`text-2xl font-black mb-4 italic ${
                                         h.disponibilidad ? "text-slate-800 dark:text-white" : "text-blue-700 dark:text-blue-400"
                                     }`}>
                                         {h.horario}
                                     </p>
                                     
-                                    {/* Estado visual ) */}
-                                    <div className={`w-full flex items-center justify-center gap-2 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border ${
-                                        h.disponibilidad 
-                                        ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/40' 
-                                        : 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/30'
-                                    }`}>
-                                        {h.disponibilidad ? (
-                                            <><CheckCircle2 size={12}/> Libre</>
+                                    <button 
+                                        disabled={isProcessing}
+                                        onClick={() => toggleDisponibilidad(h)}
+                                        className={`w-full flex items-center justify-center gap-2 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all active:scale-95 ${
+                                            h.disponibilidad 
+                                            ? 'bg-emerald-50 text-emerald-600 border-emerald-100 hover:bg-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/40' 
+                                            : 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/30 hover:bg-blue-700'
+                                        }`}
+                                    >
+                                        {isProcessing ? (
+                                            <Loader2 size={12} className="animate-spin" />
+                                        ) : h.disponibilidad ? (
+                                            <><CheckCircle2 size={12}/> Reservado</>
                                         ) : (
-                                            <><AlertCircle size={12}/> Reservado</>
+                                            <><RefreshCw size={12}/> Liberar Turno</>
                                         )}
-                                    </div>
+                                    </button>
                                 </div>
                             ))}
                         </div>
